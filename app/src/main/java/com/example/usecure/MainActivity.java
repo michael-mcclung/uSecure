@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     // texts and buttons
     EditText emailText, passwordText;
-    Button signInbtn;
+    Button signinbtn, createBtn, forgotpasswordBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +37,36 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        initializeUI();
-
-        signInbtn.setOnClickListener( new View.OnClickListener() {
+        signinbtn = (Button) findViewById( R.id.signinBtn );
+        signinbtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loginUserAccount();
             }
         });
+
+        createBtn = (Button) findViewById( R.id.createBtn );
+        createBtn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createIntent = new Intent( getApplicationContext(), SignUpActivity.class );
+                startActivity( createIntent );
+            }
+        } );
+
+        forgotpasswordBtn = (Button) findViewById( R.id.forgotpasswordBtn );
+        forgotpasswordBtn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent forgotIntent = new Intent( getApplicationContext(), ForgotPasswordActivity.class );
+                startActivity( forgotIntent );
+            }
+        } );
     }
 
-    private void initializeUI() {
-        emailText = findViewById(R.id.emailText);
-        passwordText = findViewById(R.id.passwordText);
-
-        signInbtn = findViewById(R.id.signinBtn);
+    public void NavigateForgotPassword(View v) {
+        Intent forgotPassIntent = new Intent(this, ForgotPasswordActivity.class);
+        startActivity(forgotPassIntent);
     }
 
     private void loginUserAccount(){
@@ -57,15 +74,16 @@ public class MainActivity extends AppCompatActivity {
         emailText = findViewById( R.id.emailText );
         passwordText = findViewById( R.id.passwordText );
 
-        signInbtn.setOnClickListener( new View.OnClickListener() {
+        signinbtn.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
                 String email = emailText.getText().toString();
                 final String password = passwordText.getText().toString();
+
                 if (TextUtils.isEmpty( email )){
-                    Toast.makeText( getApplicationContext(),  "Enter your mail address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText( getApplicationContext(),  "Enter your email address", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty( password )) {
@@ -74,14 +92,13 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // authenticate user
-                mAuth.signInWithEmailAndPassword( String.valueOf( emailText ), String.valueOf( passwordText ) ).
+                mAuth.signInWithEmailAndPassword( email, password).
                         addOnCompleteListener( MainActivity.this, new OnCompleteListener<AuthResult>() {
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText( getApplicationContext(), "Login successful!", Toast.LENGTH_LONG ).show();
-
                             Intent intent = new Intent(MainActivity.this, Home.class);
                             startActivity(intent);
                             finish();
