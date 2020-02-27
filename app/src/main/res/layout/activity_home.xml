@@ -44,18 +44,6 @@
         app:layout_constraintVertical_bias="0.705" />
 
     <Button
-        android:id="@+id/manageBtn"
-        android:layout_width="215dp"
-        android:layout_height="46dp"
-        android:background="#87cefa"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.816" />
-
-    <Button
         android:id="@+id/emergencyBtn"
         android:layout_width="215dp"
         android:layout_height="46dp"
@@ -68,18 +56,7 @@
         app:layout_constraintVertical_bias="0.916" />
 
     <Button
-        android:id="@+id/manageBtn"
-        android:layout_width="215dp"
-        android:layout_height="46dp"
-        android:background="#87cefa"
-        android:text="Manage Guests"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/manageBtn"
+        android:id="@+id/voiceCommandBtn"
         android:layout_width="215dp"
         android:layout_height="46dp"
         android:background="#87cefa"
@@ -128,5 +105,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.149" />
+
+    <Button
+        android:id="@+id/manageBtn"
+        android:layout_width="208dp"
+        android:layout_height="49dp"
+        android:background="#87cefa"
+        android:text="Manage "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="212dp"
+        android:layout_height="48dp"
+        android:background="#87cefa"
+        android:text="Logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/space2"
+        app:layout_constraintVertical_bias="0.816" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

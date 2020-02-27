@@ -64,11 +64,6 @@ public class MainActivity extends AppCompatActivity {
         } );
     }
 
-    public void NavigateForgotPassword(View v) {
-        Intent forgotPassIntent = new Intent(this, ForgotPasswordActivity.class);
-        startActivity(forgotPassIntent);
-    }
-
     private void loginUserAccount(){
         // texts
         emailText = findViewById( R.id.emailText );
