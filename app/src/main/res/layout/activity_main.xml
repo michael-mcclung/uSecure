@@ -56,7 +56,6 @@
         android:layout_width="215dp"
         android:layout_height="40dp"
         android:background="#87cefa"
-        android:onClick="Home"
         android:text="Sign In"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +85,6 @@
         android:background="#0000ff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -104,5 +102,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="136dp"
+        android:layout_height="63dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="362dp"
+        android:layout_height="356dp"
+        app:srcCompat="@mipmap/logo"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="84dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

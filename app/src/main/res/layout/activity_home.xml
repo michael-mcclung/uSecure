@@ -13,8 +13,11 @@
         android:layout_height="46dp"
         android:background="#87cefa"
         android:text="Door Lock Control"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="222dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/space2"
+        app:layout_constraintVertical_bias="0.398" />
 
     <Button
         android:id="@+id/securityCamFeedBtn"
@@ -22,26 +25,35 @@
         android:layout_height="46dp"
         android:background="#87cefa"
         android:text="Security Camera Feed"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="155dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/space2"
+        app:layout_constraintVertical_bias="0.303" />
 
     <Button
-        android:id="@+id/logoutBtn"
+        android:id="@+id/settingsBtn"
         android:layout_width="215dp"
         android:layout_height="46dp"
         android:background="#87cefa"
         android:text="Settings"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="487dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/space2"
+        app:layout_constraintVertical_bias="0.705" />
 
     <Button
-        android:id="@+id/logoutBtn"
+        android:id="@+id/manageBtn"
         android:layout_width="215dp"
         android:layout_height="46dp"
         android:background="#87cefa"
         android:text="Logout"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="548dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.816" />
 
     <Button
         android:id="@+id/emergencyBtn"
@@ -49,45 +61,45 @@
         android:layout_height="46dp"
         android:background="#C62828"
         android:text="Emergency Call"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="617dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.916" />
 
     <Button
-        android:id="@+id/logoutBtn"
+        android:id="@+id/manageBtn"
         android:layout_width="215dp"
         android:layout_height="46dp"
         android:background="#87cefa"
         android:text="Manage Guests"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="294dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/logoutBtn"
+        android:id="@+id/manageBtn"
         android:layout_width="215dp"
         android:layout_height="46dp"
         android:background="#87cefa"
         android:text="Voice Command"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="358dp" />
-
-    <Button
-        android:id="@+id/signinBtn"
-        android:layout_width="215dp"
-        android:layout_height="40dp"
-        android:background="#87cefa"
-        android:onClick="Home"
-        android:text="Sign In"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="431dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/space2"
+        app:layout_constraintVertical_bias="0.607" />
 
     <Space
+        android:id="@+id/space2"
         android:layout_width="413dp"
         android:layout_height="59dp"
         android:background="#0000ff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/companyTopTitle"
@@ -96,8 +108,12 @@
         android:text="uSecure"
         android:textColor="#EF6C00"
         android:textSize="30sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/space2"
+        app:layout_constraintEnd_toEndOf="@+id/space2"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.888" />
 
     <TextView
         android:id="@+id/homeText"
@@ -105,8 +121,12 @@
         android:layout_height="wrap_content"
         android:text="Home"
         android:textColor="#FFFFFF"
-        android:textSize="40sp"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="87dp" />
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.149" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
