@@ -22,18 +22,16 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <Button
-        android:id="@+id/startBtn"
+        android:id="@+id/recordBtn"
         android:layout_width="240dp"
         android:layout_height="49dp"
-        android:text=" Start Recording"
+        android:text="Tap and Hold to Record"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.866"
-        android:onClick="startRecording"
-        />
+        app:layout_constraintVertical_bias="0.756" />
 
     <Button
         android:id="@+id/stopBtn"
@@ -42,12 +40,10 @@
         android:text="Stop Recording"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.722"
-        android:onClick="stopRecording"
-        />
+        app:layout_constraintVertical_bias="0.611" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -60,4 +56,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.164"
         app:srcCompat="@mipmap/logo" />
+
+    <Button
+        android:id="@+id/playBtn"
+        android:layout_width="236dp"
+        android:layout_height="50dp"
+        android:text="Play Audio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.548"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.889" />
+
+    <TextView
+        android:id="@+id/RecordBtnTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Record Button"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.694" />
 </androidx.constraintlayout.widget.ConstraintLayout>
