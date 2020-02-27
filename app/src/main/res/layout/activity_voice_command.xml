@@ -7,67 +7,56 @@
     android:background="#001540"
     tools:context=".VoiceCommandActivity">
 
-    <TextView
-        android:id="@+id/companyTopTitle2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="uSecure"
-        android:textColor="#EF6C00"
-        android:textSize="30sp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="402dp"
+        android:layout_height="62dp"
+        android:background="#0000ff"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/companyTopTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="uSecure"
+            android:textColor="#EF6C00"
+            android:textSize="50sp"
+            app:layout_constraintHorizontal_bias="0.052"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.888" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/recordBtn"
         android:layout_width="240dp"
         android:layout_height="49dp"
         android:text="Tap and Hold to Record"
+        android:background="#87cefa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.756" />
-
-    <Button
-        android:id="@+id/stopBtn"
-        android:layout_width="233dp"
-        android:layout_height="51dp"
-        android:text="Stop Recording"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.611" />
+        app:layout_constraintVertical_bias="0.803" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="434dp"
-        android:layout_height="342dp"
+        android:layout_width="326dp"
+        android:layout_height="281dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.164"
+        app:layout_constraintVertical_bias="0.431"
         app:srcCompat="@mipmap/logo" />
-
-    <Button
-        android:id="@+id/playBtn"
-        android:layout_width="236dp"
-        android:layout_height="50dp"
-        android:text="Play Audio"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.548"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.889" />
 
     <TextView
         android:id="@+id/RecordBtnTextView"
@@ -80,5 +69,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.694" />
+        app:layout_constraintVertical_bias="0.723" />
+
+    <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="241dp"
+        android:layout_height="56dp"
+        android:text="HOME"
+        android:background="#87cefa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.952" />
+
+    <TextView
+        android:id="@+id/voiceCommandTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voice Command"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.152" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,7 @@
 package com.example.usecure;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.media.MediaPlayer;
+import android.content.Intent;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,27 +9,22 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.IOException;
 
 public class VoiceCommandActivity extends AppCompatActivity {
 
-    private Button recordBtn;
+    private Button recordBtn, homeBtn;
     private TextView RecordBtnTextView;
 
     private MediaRecorder mRecorder;
@@ -53,6 +47,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
         RecordBtnTextView = (TextView) findViewById( R.id.RecordBtnTextView );
         recordBtn = (Button) findViewById( R.id.recordBtn );
+        homeBtn = (Button) findViewById( R.id.homeBtn );
 
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
         mFileName +=  "/recorder_audio.3gp";
@@ -73,6 +68,14 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
                 }
                 return false;
+            }
+        } );
+
+        homeBtn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent( getApplicationContext(), Home.class );
+                startActivity( homeIntent );
             }
         } );
 
