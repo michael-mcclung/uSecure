@@ -4,15 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#001540"
     tools:context=".MainActivity">
 
-    <TextView
+    <EditText
+        android:id="@+id/usernameBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:textColor="#FAFFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.553"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/createAccountBtn"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:background="#87cefa"
+        android:text="Create Account"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="611dp" />
+
+    <Button
+        android:id="@+id/forgotpasswordBtn"
+        android:layout_width="140dp"
+        android:layout_height="28dp"
+        android:background="#00FFFFFF"
+        android:text="Forgot Password?"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="216dp"
+        tools:layout_editor_absoluteY="484dp" />
+
+    <Button
+        android:id="@+id/signinBtn"
+        android:layout_width="215dp"
+        android:layout_height="40dp"
+        android:background="#87cefa"
+        android:text="Sign In"
+        tools:layout_editor_absoluteX="102dp"
+        tools:layout_editor_absoluteY="535dp" />
+
+    <EditText
+        android:id="@+id/passwordBtn"
+        android:layout_width="215dp"
+        android:layout_height="28dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.648"
+        tools:ignore="MissingConstraints" />
+
+    <Space
+        android:layout_width="413dp"
+        android:layout_height="59dp"
+        android:background="#0000ff"
+        app:layout_constraintBottom_toTopOf="@+id/usernameBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/companyTopTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="uSecure"
+        android:textColor="#EF6C00"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
