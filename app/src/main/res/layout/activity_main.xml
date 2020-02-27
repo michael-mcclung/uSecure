@@ -8,16 +8,13 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/usernameBtn"
+        android:id="@+id/emailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:textColor="#FAFFFFFF"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textColorLink="#FFFFFF"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
@@ -27,13 +24,17 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/createAccountBtn"
+        android:id="@+id/createBtn"
         android:layout_width="215dp"
         android:layout_height="46dp"
         android:background="#87cefa"
         android:text="Create Account"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="611dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space"
+        app:layout_constraintVertical_bias="0.883" />
 
     <Button
         android:id="@+id/forgotpasswordBtn"
@@ -43,20 +44,28 @@
         android:text="Forgot Password?"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
-        tools:layout_editor_absoluteX="216dp"
-        tools:layout_editor_absoluteY="484dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.756"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space"
+        app:layout_constraintVertical_bias="0.659" />
 
     <Button
         android:id="@+id/signinBtn"
         android:layout_width="215dp"
         android:layout_height="40dp"
         android:background="#87cefa"
+        android:onClick="Home"
         android:text="Sign In"
-        tools:layout_editor_absoluteX="102dp"
-        tools:layout_editor_absoluteY="535dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space"
+        app:layout_constraintVertical_bias="0.77" />
 
     <EditText
-        android:id="@+id/passwordBtn"
+        android:id="@+id/passwordText"
         android:layout_width="215dp"
         android:layout_height="28dp"
         android:background="#FFFFFF"
@@ -71,12 +80,13 @@
         tools:ignore="MissingConstraints" />
 
     <Space
+        android:id="@+id/space"
         android:layout_width="413dp"
         android:layout_height="59dp"
         android:background="#0000ff"
-        app:layout_constraintBottom_toTopOf="@+id/usernameBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -88,7 +98,11 @@
         android:text="uSecure"
         android:textColor="#EF6C00"
         android:textSize="30sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

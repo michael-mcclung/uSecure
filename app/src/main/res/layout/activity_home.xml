@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#001540"
+    tools:context=".Home">
+
+    <Button
+        android:id="@+id/doorControlBtn"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:background="#87cefa"
+        android:text="Door Lock Control"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="222dp" />
+
+    <Button
+        android:id="@+id/securityCamFeedBtn"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:background="#87cefa"
+        android:text="Security Camera Feed"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="155dp" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:background="#87cefa"
+        android:text="Settings"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="487dp" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:background="#87cefa"
+        android:text="Logout"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="548dp" />
+
+    <Button
+        android:id="@+id/emergencyBtn"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:background="#C62828"
+        android:text="Emergency Call"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="617dp" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:background="#87cefa"
+        android:text="Manage Guests"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="294dp" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:background="#87cefa"
+        android:text="Voice Command"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="358dp" />
+
+    <Button
+        android:id="@+id/signinBtn"
+        android:layout_width="215dp"
+        android:layout_height="40dp"
+        android:background="#87cefa"
+        android:onClick="Home"
+        android:text="Sign In"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="431dp" />
+
+    <Space
+        android:layout_width="413dp"
+        android:layout_height="59dp"
+        android:background="#0000ff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/companyTopTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="uSecure"
+        android:textColor="#EF6C00"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/homeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="87dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
