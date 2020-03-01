@@ -21,7 +21,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".EmergencyCallActivity"></activity>
+        <activity android:name=".ContactUsActivity"></activity>
+        <activity android:name=".AppearenceActivity" />
+        <activity android:name=".NotificationsActivity" />
+        <activity android:name=".PassKeyActivity" />
+        <activity android:name=".PairDeviceActivity" />
+        <activity android:name=".ManageUsersActivity" />
+        <activity android:name=".EmergencyCallActivity" />
         <activity android:name=".DoorControlActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".SecurityCameraFeedActivity" />
