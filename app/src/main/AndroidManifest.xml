@@ -21,9 +21,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".ContactUsActivity"></activity>
+        <activity android:name=".UploadPhotoActivity"></activity>
+        <activity android:name=".ContactUsActivity" />
         <activity android:name=".AppearenceActivity" />
         <activity android:name=".NotificationsActivity" />
+
+        <service android:name=".NotificationsActivity">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity android:name=".PassKeyActivity" />
         <activity android:name=".PairDeviceActivity" />
         <activity android:name=".ManageUsersActivity" />
