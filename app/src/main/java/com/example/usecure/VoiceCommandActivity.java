@@ -50,7 +50,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
         homeBtn = (Button) findViewById( R.id.homeBtn );
 
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mFileName +=  "/recorder_audio.3gp";
+        mFileName +=  "/recorder_audio.mp4";
 
         recordBtn.setOnTouchListener( new View.OnTouchListener() {
             @Override
@@ -84,7 +84,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
     private void startRecording() {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mRecorder.setOutputFile(mFileName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
@@ -110,6 +110,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
         mProgress.setMessage( "Uploading audio..." );
         mProgress.show();
 
+        // add to make multiple files uploadable here
         StorageReference filepath = mStorage.child( "Audio" ).child( "new_audio.3gp" );
 
         Uri uri = Uri.fromFile( new File( mFileName ) );
