@@ -10,39 +10,59 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 public class DoorControlActivity extends AppCompatActivity {
+
+    ToggleButton doorControlToggle;
+    Spinner spinnerDropDown;
+
+    Button submitBtn, addNewDoorBtn;
+    EditText nameOfNewDoorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_door_control );
 
-        final ToggleButton doorControlToggle;
-        final Spinner spinnerDropDown;
-        Button submitBtn;
-
         doorControlToggle = (ToggleButton) findViewById( R.id.doorControlToggle );
         spinnerDropDown = (Spinner) findViewById( R.id.spinnerDropDown );
+
         submitBtn = (Button) findViewById( R.id.submitBtn );
+        addNewDoorBtn = (Button) findViewById( R.id.addNewDoorBtn );
+        nameOfNewDoorText = (EditText) findViewById( R.id.nameOfNewDoorText );
+
+        addNewDoorBtn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String getFileName = nameOfNewDoorText.getText().toString();
+                nameOfNewDoorText.setText( getFileName );
+
+                DatabaseReference dataBaseRef = FirebaseDatabase.getInstance().getReference();
+                dataBaseRef = dataBaseRef.child( "doorControl" ).child( nameOfNewDoorText.getText().toString() + ".door" );
+            }
+        } );
 
         ArrayList<String> arrayList = new ArrayList<>( );
-        arrayList.add("Door 1");
-        arrayList.add("Door 2");
-        arrayList.add("Door 3");
-        arrayList.add("Door 4");
-
+        if (arrayList.isEmpty()) {
+            arrayList.add( nameOfNewDoorText.getText().toString() );
+        } else {
+            arrayList.add( nameOfNewDoorText.getText().toString() );
+        }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDropDown.setAdapter(arrayAdapter);
+
         spinnerDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
