@@ -1,16 +1,19 @@
 package com.example.usecure;
 
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,21 +26,26 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class VoiceCommandActivity extends AppCompatActivity {
 
     private Button recordBtn, homeBtn, deleteRecordingBtn, saveBtn;
     private TextView RecordBtnTextView, autoCompleteText, nameOfRecordingText = null;
+    private TextView textOutput;
 
     private MediaRecorder mRecorder;
 
-    private String mFileName = null, userRecordindName;
+    private String mFileName = null;
 
     private static final String LOG_TAG = "Record_log";
 
     private StorageReference mStorage;
 
     private ProgressDialog mProgress;
+
+    private final int SPEECH_RECOGNITION_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceStatus) {
@@ -50,6 +58,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
         RecordBtnTextView = (TextView) findViewById( R.id.RecordBtnTextView );
         autoCompleteText = (TextView) findViewById( R.id.autoCompleteText );
         nameOfRecordingText = (TextView) findViewById( R.id.nameOfRecordingText );
+        textOutput = (TextView) findViewById(R.id.textOutput);
 
         saveBtn = (Button) findViewById( R.id.saveBtn );
         deleteRecordingBtn = (Button) findViewById( R.id.deleteRecordingBtn );
@@ -68,9 +77,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
             }
         } );
 
-        recordBtn.setOnTouchListener( new View.OnTouchListener() {
-
-
+ /*       recordBtn.setOnTouchListener( new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -86,6 +93,13 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
                 }
                 return false;
+            }
+        });
+*/
+        recordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startSpeechToText();
             }
         });
 
@@ -106,7 +120,41 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
     }
 
-    private void startRecording() {
+    /**
+     * Start speech to text intent. This opens up Google Speech Recognition API dialog box to listen the speech input.
+     * */
+    private void startSpeechToText() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak something...");
+        try {
+            startActivityForResult(intent, SPEECH_RECOGNITION_CODE);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    "Sorry! Speech recognition is not supported in this device.", Toast.LENGTH_SHORT).show();
+        }
+    }
+    /**
+     * Callback for speech recognition activity
+     * */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case SPEECH_RECOGNITION_CODE: {
+                if (resultCode == RESULT_OK && null != data) {
+                    ArrayList<String> voiceInText = data
+                            .getStringArrayListExtra( RecognizerIntent.EXTRA_RESULTS);
+                    String text = voiceInText.get(0);
+                    textOutput.setText(text);
+                }
+                break;
+            }
+        }
+    }
+
+/*    private void startRecording() {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -128,7 +176,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
         mRecorder = null;
 
         upLoadAudio();
-    }
+    }*/
 
     private void deleteOldRecordings() {
 
@@ -155,13 +203,12 @@ public class VoiceCommandActivity extends AppCompatActivity {
         });
     }
 
-    private void upLoadAudio() {
+   /* private void upLoadAudio() {
 
         mProgress.setMessage( "Uploading audio..." );
         mProgress.show();
 
         StorageReference filepath = mStorage.child( "Audio" ).child( nameOfRecordingText.getText().toString() + ".3gp" );
-
         Uri uri = Uri.fromFile( new File( mFileName ) );
 
         filepath.putFile( uri ).addOnSuccessListener( new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -173,5 +220,5 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
             }
         } );
-    }
+    }*/
 }
