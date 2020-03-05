@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,6 +44,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
     private static final String LOG_TAG = "Record_log";
 
     private StorageReference mStorage;
+    private DatabaseReference mDatabase;
 
     private ProgressDialog mProgress;
 
@@ -54,11 +57,12 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
         mProgress = new ProgressDialog( this );
         mStorage = FirebaseStorage.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference( "Audio" );
 
         RecordBtnTextView = (TextView) findViewById( R.id.RecordBtnTextView );
         autoCompleteText = (TextView) findViewById( R.id.autoCompleteText );
         nameOfRecordingText = (TextView) findViewById( R.id.nameOfRecordingText );
-        textOutput = (TextView) findViewById(R.id.textOutput);
+        textOutput = (TextView) findViewById( R.id.textOutput );
 
         saveBtn = (Button) findViewById( R.id.saveBtn );
         deleteRecordingBtn = (Button) findViewById( R.id.deleteRecordingBtn );
@@ -66,42 +70,23 @@ public class VoiceCommandActivity extends AppCompatActivity {
         homeBtn = (Button) findViewById( R.id.homeBtn );
 
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mFileName +=  "/recorder_audio.mp4";
+        mFileName += "/recorder_audio.mp4";
 
         saveBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String getFileName = nameOfRecordingText.getText().toString();
-                nameOfRecordingText.setText( getFileName );
+                String getFileName = textOutput.getText().toString();
+                mDatabase.child( getFileName );
             }
         } );
 
- /*       recordBtn.setOnTouchListener( new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                if (event.getAction() == MotionEvent.ACTION_DOWN){
-
-                    startRecording();
-                    RecordBtnTextView.setText( "Recording started..." );
-
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-
-                    stopRecording();
-                    RecordBtnTextView.setText( "Recording stopped!" );
-
-                }
-                return false;
-            }
-        });
-*/
-        recordBtn.setOnClickListener(new View.OnClickListener() {
+        recordBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startSpeechToText();
             }
-        });
+        } );
 
         deleteRecordingBtn.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -122,103 +107,57 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
     /**
      * Start speech to text intent. This opens up Google Speech Recognition API dialog box to listen the speech input.
-     * */
+     */
     private void startSpeechToText() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak something...");
+        Intent intent = new Intent( RecognizerIntent.ACTION_RECOGNIZE_SPEECH );
+        intent.putExtra( RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM );
+        intent.putExtra( RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault() );
+        intent.putExtra( RecognizerIntent.EXTRA_PROMPT, "Speak something..." );
         try {
-            startActivityForResult(intent, SPEECH_RECOGNITION_CODE);
+            startActivityForResult( intent, SPEECH_RECOGNITION_CODE );
         } catch (ActivityNotFoundException a) {
-            Toast.makeText(getApplicationContext(),
-                    "Sorry! Speech recognition is not supported in this device.", Toast.LENGTH_SHORT).show();
+            Toast.makeText( getApplicationContext(),
+                    "Sorry! Speech recognition is not supported in this device.", Toast.LENGTH_SHORT ).show();
         }
     }
+
     /**
      * Callback for speech recognition activity
-     * */
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult( requestCode, resultCode, data );
+
         switch (requestCode) {
             case SPEECH_RECOGNITION_CODE: {
                 if (resultCode == RESULT_OK && null != data) {
-                    ArrayList<String> voiceInText = data
-                            .getStringArrayListExtra( RecognizerIntent.EXTRA_RESULTS);
-                    String text = voiceInText.get(0);
-                    textOutput.setText(text);
+                    ArrayList<String> voiceInText = data.getStringArrayListExtra( RecognizerIntent.EXTRA_RESULTS );
+                    String text = voiceInText.get( 0 );
+
+                    // puts speech into text in text box
+                    textOutput.setText( text );
+
+                    // new way
+                    String id = mDatabase.push().getKey();
+                    String name = nameOfRecordingText.getText().toString().trim();
+
+                    AudioFiles af = new AudioFiles( id, name, text );
+                    mDatabase.child( id ).setValue( af );
+                    Toast.makeText( this, "Audio name and audio added", Toast.LENGTH_LONG ).show();
                 }
                 break;
             }
         }
     }
 
-/*    private void startRecording() {
-        mRecorder = new MediaRecorder();
-        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mRecorder.setOutputFile(mFileName);
-        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-
-        try {
-            mRecorder.prepare();
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
-        }
-
-        mRecorder.start();
-    }
-
-    private void stopRecording() {
-        mRecorder.stop();
-        mRecorder.release();
-        mRecorder = null;
-
-        upLoadAudio();
-    }*/
-
+    // doesnt work properly
     private void deleteOldRecordings() {
 
-        // Create a reference to the file to delete
-        StorageReference desertRef =  mStorage.child( "Audio" ).child( autoCompleteText.getText().toString() + ".3gp" );
-
-        mProgress.setMessage( "Deleting recording..." );
+        String id = mDatabase.getKey();
+        String audioToDelete = autoCompleteText.toString();
+        DatabaseReference deleterecord = mDatabase.child( audioToDelete );
+        deleterecord.removeValue();
+        mProgress.setMessage( "Recording deleted!" );
         mProgress.show();
-
-        // Delete the file
-        desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                mProgress.setMessage( "Recording deleted!" );
-                mProgress.dismiss();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                mProgress.setMessage( "ERROR!" );
-                mProgress.show();
-                mProgress.dismiss();
-            }
-        });
     }
-
-   /* private void upLoadAudio() {
-
-        mProgress.setMessage( "Uploading audio..." );
-        mProgress.show();
-
-        StorageReference filepath = mStorage.child( "Audio" ).child( nameOfRecordingText.getText().toString() + ".3gp" );
-        Uri uri = Uri.fromFile( new File( mFileName ) );
-
-        filepath.putFile( uri ).addOnSuccessListener( new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                mProgress.dismiss();
-                mProgress.setMessage( "Uploading finished." );
-
-            }
-        } );
-    }*/
 }
