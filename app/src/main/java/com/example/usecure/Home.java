@@ -86,9 +86,15 @@ public class Home extends AppCompatActivity {
 
     public void logout() {
         mAuth.getInstance().signOut();
+        Intent intent = new Intent(Home.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         System.out.println( "User Logged Out" );
-        Intent logoutIntent = new Intent( getApplicationContext(), MainActivity.class );
-        startActivity( logoutIntent );
+        //Intent logoutIntent = new Intent( getApplicationContext(), MainActivity.class );
+        //startActivity( logoutIntent );
+        finish();
     }
 
 }
