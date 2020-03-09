@@ -15,19 +15,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -142,7 +137,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
                     String name = nameOfRecordingText.getText().toString().trim();
 
                     AudioFiles af = new AudioFiles( id, name, text );
-                    mDatabase.child( id ).setValue( af );
+                    mDatabase.child( name ).setValue( af );
                     Toast.makeText( this, "Audio name and audio added", Toast.LENGTH_LONG ).show();
                 }
                 break;
@@ -153,11 +148,14 @@ public class VoiceCommandActivity extends AppCompatActivity {
     // doesnt work properly
     private void deleteOldRecordings() {
 
-        String id = mDatabase.getKey();
-        String audioToDelete = autoCompleteText.toString();
-        DatabaseReference deleterecord = mDatabase.child( audioToDelete );
-        deleterecord.removeValue();
-        mProgress.setMessage( "Recording deleted!" );
-        mProgress.show();
+        String name = autoCompleteText.getText().toString();
+        Task deleteAudio = mDatabase.child( name ).removeValue();
+
+        if (deleteAudio == null) {
+            Toast.makeText( this, "Audio not found", Toast.LENGTH_LONG ).show();
+
+        } else {
+            Toast.makeText( this, "Audio deleted", Toast.LENGTH_LONG ).show();
+        }
     }
 }
