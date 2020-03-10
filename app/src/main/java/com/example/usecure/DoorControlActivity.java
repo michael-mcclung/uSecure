@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
@@ -23,11 +24,12 @@ import java.util.ArrayList;
 
 public class DoorControlActivity extends AppCompatActivity {
 
-    ToggleButton doorControlToggle;
-    Spinner spinnerDropDown;
-
-    Button submitBtn, addNewDoorBtn;
-    EditText nameOfNewDoorText;
+    // toggle button, buttons, spinners, and EditText field variables
+    private ToggleButton doorControlToggle;
+    private Button addNewDoorBtn;
+    private Spinner spinnerDropDown;
+    private EditText nameOfNewDoorText;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,59 +39,51 @@ public class DoorControlActivity extends AppCompatActivity {
         doorControlToggle = (ToggleButton) findViewById( R.id.doorControlToggle );
         spinnerDropDown = (Spinner) findViewById( R.id.spinnerDropDown );
 
-        submitBtn = (Button) findViewById( R.id.submitBtn );
         addNewDoorBtn = (Button) findViewById( R.id.addNewDoorBtn );
         nameOfNewDoorText = (EditText) findViewById( R.id.nameOfNewDoorText );
+
+        mDatabase = FirebaseDatabase.getInstance().getReference( "Doors" );
 
         addNewDoorBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String getFileName = nameOfNewDoorText.getText().toString();
-                nameOfNewDoorText.setText( getFileName );
+                String id = mDatabase.push().getKey();
+                String getDoorName = nameOfNewDoorText.getText().toString();
+                int switchState = 0;
 
-                DatabaseReference dataBaseRef = FirebaseDatabase.getInstance().getReference();
-                dataBaseRef = dataBaseRef.child( "doorControl" ).child( nameOfNewDoorText.getText().toString() + ".door" );
+                ArrayListOfDoors addToList = new ArrayListOfDoors(id, getDoorName, switchState);
+                mDatabase.child( getDoorName ).setValue( addToList );
             }
         } );
 
-        ArrayList<String> arrayList = new ArrayList<>( );
-        if (arrayList.isEmpty()) {
-            arrayList.add( nameOfNewDoorText.getText().toString() );
-        } else {
-            arrayList.add( nameOfNewDoorText.getText().toString() );
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDropDown.setAdapter(arrayAdapter);
+        /*DatabaseReference getArrayMainRef = FirebaseDatabase.getInstance().getReference("Doors");
+        DatabaseReference getArraySubTitle = null;
+        Task addToArray = getArraySubTitle.setValue( getArrayMainRef.child( "doorName" ));
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add( addToArray.toString() );
 
-        spinnerDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, android.R.layout.simple_spinner_dropdown_item, arrayList );
+        arrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+        spinnerDropDown.setAdapter( arrayAdapter );*/
+
+        spinnerDropDown.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String displayName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(parent.getContext(), "Selected: " + displayName, Toast.LENGTH_LONG).show();
+                String displayName = parent.getItemAtPosition( position ).toString();
+                Toast.makeText( parent.getContext(), "Selected: " + displayName, Toast.LENGTH_LONG ).show();
             }
-            @Override
-            public void onNothingSelected(AdapterView <?> parent) {
-            }
-        });
 
-        submitBtn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        } );
+
+        doorControlToggle.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                DatabaseReference mDatabase;
-                int on = 1, off = 0;
-                String sOn = "ON", sOff = "OFF";
-
-                if (spinnerDropDown.isSelected()){
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        if (doorControlToggle.isVisibleToUserForAutofill( on )){
-                            mDatabase = FirebaseDatabase.getInstance().getReference().child( "doorControl" );
-                            mDatabase.push().setValue( 1 );
-                        }
-                    }
-                }
             }
-    });
-}}
+        } );
+    }
+}
