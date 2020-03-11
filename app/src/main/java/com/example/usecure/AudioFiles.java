@@ -4,9 +4,7 @@ import android.widget.TextView;
 
 public class AudioFiles {
 
-    private String nameOfTextFile;
-    private String speechToText;
-    private String audioId;
+    private String nameOfTextFile, speechToText, audioId;
 
     public AudioFiles() {
 

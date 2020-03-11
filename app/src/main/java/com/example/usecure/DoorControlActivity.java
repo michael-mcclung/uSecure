@@ -2,25 +2,19 @@ package com.example.usecure;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.os.TokenWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.StorageReference;
-
-import java.util.ArrayList;
 
 public class DoorControlActivity extends AppCompatActivity {
 
@@ -30,6 +24,7 @@ public class DoorControlActivity extends AppCompatActivity {
     private Spinner spinnerDropDown;
     private EditText nameOfNewDoorText;
     private DatabaseReference mDatabase;
+    private FirebaseAuth pathForDoorControl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +37,7 @@ public class DoorControlActivity extends AppCompatActivity {
         addNewDoorBtn = (Button) findViewById( R.id.addNewDoorBtn );
         nameOfNewDoorText = (EditText) findViewById( R.id.nameOfNewDoorText );
 
-        mDatabase = FirebaseDatabase.getInstance().getReference( "Doors" );
+        mDatabase = FirebaseDatabase.getInstance().getReference( "Main User");
 
         addNewDoorBtn.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -51,9 +46,10 @@ public class DoorControlActivity extends AppCompatActivity {
                 String id = mDatabase.push().getKey();
                 String getDoorName = nameOfNewDoorText.getText().toString();
                 int switchState = 0;
+                FirebaseUser path = pathForDoorControl.getCurrentUser();
 
-                ArrayListOfDoors addToList = new ArrayListOfDoors(id, getDoorName, switchState);
-                mDatabase.child( getDoorName ).setValue( addToList );
+                ArrayListOfDoors addToList = new ArrayListOfDoors( id, getDoorName, switchState );
+                mDatabase.child( String.valueOf( path ) ).child( "Door Control" ).child( getDoorName ).setValue( addToList );
             }
         } );
 

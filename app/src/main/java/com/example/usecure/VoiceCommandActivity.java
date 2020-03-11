@@ -18,10 +18,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -29,32 +30,22 @@ import java.util.Locale;
 public class VoiceCommandActivity extends AppCompatActivity {
 
     private Button recordBtn, homeBtn, deleteRecordingBtn, saveBtn;
-    private TextView RecordBtnTextView, autoCompleteText, nameOfRecordingText = null;
+    private TextView autoCompleteText, nameOfRecordingText = null;
     private TextView textOutput;
 
-    private MediaRecorder mRecorder;
-
-    private String mFileName = null;
-
-    private static final String LOG_TAG = "Record_log";
-
-    private StorageReference mStorage;
     private DatabaseReference mDatabase;
 
-    private ProgressDialog mProgress;
-
     private final int SPEECH_RECOGNITION_CODE = 1;
+    private FirebaseAuth audioPath;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceStatus) {
         super.onCreate( savedInstanceStatus );
         setContentView( R.layout.activity_voice_command );
 
-        mProgress = new ProgressDialog( this );
-        mStorage = FirebaseStorage.getInstance().getReference();
-        mDatabase = FirebaseDatabase.getInstance().getReference( "Audio" );
+        mDatabase = FirebaseDatabase.getInstance().getReference( "Main User" );
 
-        RecordBtnTextView = (TextView) findViewById( R.id.RecordBtnTextView );
         autoCompleteText = (TextView) findViewById( R.id.autoCompleteText );
         nameOfRecordingText = (TextView) findViewById( R.id.nameOfRecordingText );
         textOutput = (TextView) findViewById( R.id.textOutput );
@@ -63,9 +54,6 @@ public class VoiceCommandActivity extends AppCompatActivity {
         deleteRecordingBtn = (Button) findViewById( R.id.deleteRecordingBtn );
         recordBtn = (Button) findViewById( R.id.recordBtn );
         homeBtn = (Button) findViewById( R.id.homeBtn );
-
-        mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mFileName += "/recorder_audio.mp4";
 
         saveBtn.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -136,8 +124,25 @@ public class VoiceCommandActivity extends AppCompatActivity {
                     String id = mDatabase.push().getKey();
                     String name = nameOfRecordingText.getText().toString().trim();
 
+                    // didn't work
+                    // FirebaseUser mainPath = null;
+                    // FirebaseUser mainPath = audioPath.getCurrentUser();
+
+                    // did not work
+                    // RegisterUserInformation mainPath = new RegisterUserInformation(  );
+                    // String pathName = mainPath.getFname();
+
+                    // didn't work
+                    //DataSnapshot userFile = null;
+                    // Iterable<DataSnapshot> path = userFile.child( String.valueOf( mainPath ) ).getChildren();
+
+                    // not working - uses random uuid for everytime saved and not current uuid/user
+                    // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    // String uid = user.getUid();
+
                     AudioFiles af = new AudioFiles( id, name, text );
-                    mDatabase.child( name ).setValue( af );
+                    mDatabase.child( text ).child( "Voice Recognition" ).child( name ).setValue( af );
+
                     Toast.makeText( this, "Audio name and audio added", Toast.LENGTH_LONG ).show();
                 }
                 break;

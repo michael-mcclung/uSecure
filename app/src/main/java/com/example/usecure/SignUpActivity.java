@@ -15,14 +15,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Random;
 
 public class SignUpActivity extends AppCompatActivity {
 
     // variables
     private FirebaseAuth mAuth;
 
-    EditText newEmailText, newPasswordText;
+    EditText newEmailText, newPasswordText, fname, lname, address, phoneNum;
     Button goBackLogInBtn, registerBtn;
+
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference( "Main User");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,26 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void signUpUser() {
+
+        newEmailText = findViewById( R.id.newEmailText );
+        newPasswordText = findViewById( R.id.newPasswordText );
+        fname = findViewById( R.id.firstNameEditText );
+        lname = findViewById( R.id.lastNameEditText );
+        address = findViewById( R.id.addressEditText );
+        phoneNum = findViewById( R.id.phoneEditText );
+
+        String email = newEmailText.getText().toString();
+        String password = newPasswordText.getText().toString();
+        String first = fname.getText().toString();
+        String last = lname.getText().toString();
+        String add = address.getText().toString();
+        String number = phoneNum.getText().toString();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        RegisterUserInformation register = new RegisterUserInformation( email, password, first, last, add, number );
+        mDatabase.child(first).child( "Login Information"  ).setValue( register );
+
         // texts
         newEmailText = findViewById( R.id.newEmailText );
         newPasswordText = findViewById( R.id.newPasswordText );
