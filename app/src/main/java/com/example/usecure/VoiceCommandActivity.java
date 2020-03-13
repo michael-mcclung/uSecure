@@ -1,15 +1,11 @@
 package com.example.usecure;
 
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
-import android.media.MediaRecorder;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
 import android.speech.RecognizerIntent;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,14 +24,11 @@ import java.util.Locale;
 public class VoiceCommandActivity extends AppCompatActivity {
 
     private Button recordBtn, homeBtn, deleteRecordingBtn, saveBtn;
-    private TextView autoCompleteText, nameOfRecordingText = null;
-    private TextView textOutput;
+    private TextView autoCompleteText, nameOfRecordingText = null, textOutput;
 
     private DatabaseReference mDatabase;
 
     private final int SPEECH_RECOGNITION_CODE = 1;
-    private FirebaseAuth audioPath;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceStatus) {
@@ -123,25 +114,11 @@ public class VoiceCommandActivity extends AppCompatActivity {
                     // new way
                     String id = mDatabase.push().getKey();
                     String name = nameOfRecordingText.getText().toString().trim();
+                    String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                    // didn't work
-                    // FirebaseUser mainPath = null;
-                    // FirebaseUser mainPath = audioPath.getCurrentUser();
-
-                    // did not work
-                    // RegisterUserInformation mainPath = new RegisterUserInformation(  );
-                    // String pathName = mainPath.getFname();
-
-                    // didn't work
-                    //DataSnapshot userFile = null;
-                    // Iterable<DataSnapshot> path = userFile.child( String.valueOf( mainPath ) ).getChildren();
-
-                    // not working - uses random uuid for everytime saved and not current uuid/user
-                    // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    // String uid = user.getUid();
 
                     AudioFiles af = new AudioFiles( id, name, text );
-                    mDatabase.child( text ).child( "Voice Recognition" ).child( name ).setValue( af );
+                    mDatabase.child( userUid ).child( "Voice Recognition" ).setValue( af );
 
                     Toast.makeText( this, "Audio name and audio added", Toast.LENGTH_LONG ).show();
                 }
@@ -164,3 +141,32 @@ public class VoiceCommandActivity extends AppCompatActivity {
         }
     }
 }
+
+// tried all for saving the audio file in the firebase database
+
+// didn't work
+// FirebaseUser mainPath = null;
+// FirebaseUser mainPath = audioPath.getCurrentUser();
+
+// did not work
+// RegisterUserInformation mainPath = new RegisterUserInformation(  );
+// String pathName = mainPath.getFname();
+
+// didn't work
+//DataSnapshot userFile = null;
+// Iterable<DataSnapshot> path = userFile.child( String.valueOf( mainPath ) ).getChildren();
+
+// not working - uses random uuid for everytime saved and not current uuid/user
+// FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+// String uid = user.getUid();
+
+//RegisterUserInformation voiceUse = new RegisterUserInformation( );
+
+// didn't work
+//String firebaseQue = voiceUse.getFname();
+//String firebaseQue = mDatabase.getKey();
+
+// didn't work
+//SharedPreferences savedPath = getSharedPreferences( "pathMemory", Context.MODE_PRIVATE );
+//String user = FirebaseAuth.getInstance().getCurrentUser().toString();
+//String path = savedPath.getString( "pathKey", "Default" );

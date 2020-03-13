@@ -7,10 +7,19 @@ import java.util.Random;
 public class RegisterUserInformation {
 
     public Object voicePath;
-    private String email, password, fname, lname, address, phoneNum;
+    private String email, password, lname, address, phoneNum;
+    String fname;
 
     public RegisterUserInformation() {
+        this.fname = fname;
+        String fname1 = getFname();
+        setFname( fname1 );
+    }
 
+    public RegisterUserInformation(String fname) {
+        this.fname = fname;
+        String fname1 = getFname();
+        setFname( fname1 );
     }
 
     public RegisterUserInformation(String email, String password, String fname, String lname, String address, String phoneNum) {
