@@ -12,7 +12,6 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,7 +23,6 @@ public class DoorControlActivity extends AppCompatActivity {
     private Spinner spinnerDropDown;
     private EditText nameOfNewDoorText;
     private DatabaseReference mDatabase;
-    private FirebaseAuth pathForDoorControl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,22 +44,14 @@ public class DoorControlActivity extends AppCompatActivity {
                 String id = mDatabase.push().getKey();
                 String getDoorName = nameOfNewDoorText.getText().toString();
                 int switchState = 0;
-                FirebaseUser path = pathForDoorControl.getCurrentUser();
+                String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                 ArrayListOfDoors addToList = new ArrayListOfDoors( id, getDoorName, switchState );
-                mDatabase.child( String.valueOf( path ) ).child( "Door Control" ).child( getDoorName ).setValue( addToList );
+                mDatabase.child( userUid ).child( "Door Control" ).child( getDoorName ).setValue( addToList );
+
+               // addNewSpinnerItem();
             }
         } );
-
-        /*DatabaseReference getArrayMainRef = FirebaseDatabase.getInstance().getReference("Doors");
-        DatabaseReference getArraySubTitle = null;
-        Task addToArray = getArraySubTitle.setValue( getArrayMainRef.child( "doorName" ));
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add( addToArray.toString() );
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, android.R.layout.simple_spinner_dropdown_item, arrayList );
-        arrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-        spinnerDropDown.setAdapter( arrayAdapter );*/
 
         spinnerDropDown.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
             @Override
@@ -78,8 +68,20 @@ public class DoorControlActivity extends AppCompatActivity {
         doorControlToggle.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                //mDatabase.child( userUid ).child( "Door Control" ).getRef();
             }
         } );
     }
+
+  /*  protected void addNewSpinnerItem(){
+
+        int switchState = 0;
+        ArrayList listOfDoors = new ArrayList(  );
+        listOfDoors.add( switchState );
+
+        Spinner dynamicSpinner = new Spinner(this);
+        dynamicSpinner.setAdapter( (SpinnerAdapter) listOfDoors );
+
+    }*/
 }

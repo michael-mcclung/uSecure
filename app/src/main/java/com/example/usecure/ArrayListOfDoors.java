@@ -7,11 +7,11 @@ public class ArrayListOfDoors {
     private String audioId;
     private int switchState = 0;
 
-    public ArrayListOfDoors(String getFileName) {
+    public ArrayListOfDoors() {
 
     }
 
-    public <switchState> ArrayListOfDoors(String audioId, String doorName, int switchState) {
+    public ArrayListOfDoors(String audioId, String doorName, int switchState) {
         this.doorName = doorName;
         this.audioId = audioId;
         this.switchState = switchState;

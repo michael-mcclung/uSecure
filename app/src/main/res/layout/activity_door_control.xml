@@ -67,8 +67,8 @@
 
     <Spinner
         android:id="@+id/spinnerDropDown"
-        android:layout_width="303dp"
-        android:layout_height="40dp"
+        android:layout_width="200dp"
+        android:layout_height="53dp"
         android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,16 +78,16 @@
 
     <TextView
         android:id="@+id/addNewDoorText"
-        android:layout_width="263dp"
-        android:layout_height="42dp"
+        android:layout_width="243dp"
+        android:layout_height="40dp"
         android:text="ADD DOOR NAME"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.635"
+        app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.355" />
+        app:layout_constraintVertical_bias="0.354" />
 
     <EditText
         android:id="@+id/nameOfNewDoorText"

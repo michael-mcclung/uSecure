@@ -62,10 +62,22 @@ public class VoiceCommandActivity extends AppCompatActivity {
             }
         } );
 
+
+        // still does not work yet
         deleteRecordingBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteOldRecordings();
+
+                String name = autoCompleteText.getText().toString();
+                String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference deleteAudio = mDatabase.child( userUid ).child( "Voice Recognition" ).child( name );
+
+                if (deleteAudio != null) {
+                    mDatabase.removeValue( (DatabaseReference.CompletionListener) deleteAudio );
+                    Toast.makeText( VoiceCommandActivity.this, "Audio deleted", Toast.LENGTH_LONG ).show();
+                } else {
+                    Toast.makeText( VoiceCommandActivity.this, "Audio not found", Toast.LENGTH_LONG ).show();
+                }
             }
         } );
 
@@ -118,7 +130,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
 
                     AudioFiles af = new AudioFiles( id, name, text );
-                    mDatabase.child( userUid ).child( "Voice Recognition" ).setValue( af );
+                    mDatabase.child( userUid ).child( "Voice Recognition" ).child( name ).setValue( af );
 
                     Toast.makeText( this, "Audio name and audio added", Toast.LENGTH_LONG ).show();
                 }
@@ -126,47 +138,4 @@ public class VoiceCommandActivity extends AppCompatActivity {
             }
         }
     }
-
-    // doesnt work properly
-    private void deleteOldRecordings() {
-
-        String name = autoCompleteText.getText().toString();
-        Task deleteAudio = mDatabase.child( name ).removeValue();
-
-        if (deleteAudio == null) {
-            Toast.makeText( this, "Audio not found", Toast.LENGTH_LONG ).show();
-
-        } else {
-            Toast.makeText( this, "Audio deleted", Toast.LENGTH_LONG ).show();
-        }
-    }
 }
-
-// tried all for saving the audio file in the firebase database
-
-// didn't work
-// FirebaseUser mainPath = null;
-// FirebaseUser mainPath = audioPath.getCurrentUser();
-
-// did not work
-// RegisterUserInformation mainPath = new RegisterUserInformation(  );
-// String pathName = mainPath.getFname();
-
-// didn't work
-//DataSnapshot userFile = null;
-// Iterable<DataSnapshot> path = userFile.child( String.valueOf( mainPath ) ).getChildren();
-
-// not working - uses random uuid for everytime saved and not current uuid/user
-// FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-// String uid = user.getUid();
-
-//RegisterUserInformation voiceUse = new RegisterUserInformation( );
-
-// didn't work
-//String firebaseQue = voiceUse.getFname();
-//String firebaseQue = mDatabase.getKey();
-
-// didn't work
-//SharedPreferences savedPath = getSharedPreferences( "pathMemory", Context.MODE_PRIVATE );
-//String user = FirebaseAuth.getInstance().getCurrentUser().toString();
-//String path = savedPath.getString( "pathKey", "Default" );
