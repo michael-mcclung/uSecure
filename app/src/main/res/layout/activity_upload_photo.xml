@@ -37,13 +37,14 @@
 
     <ImageView
         android:id="@+id/imgView"
-        android:layout_width="368dp"
-        android:layout_height="332dp"
+        android:layout_width="237dp"
+        android:layout_height="254dp"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.249" />
 
     <Button
         android:id="@+id/btnUpload"
@@ -87,16 +88,41 @@
         app:layout_constraintVertical_bias="0.851" />
 
     <Button
-        android:id="@+id/backToMagnageBtn"
+        android:id="@+id/backToSignUpBtn"
         android:layout_width="114dp"
         android:layout_height="53dp"
         android:background="#87cefa"
-        android:text="BACK TO MANAGE"
+        android:text="BACK TO SIGNUP"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
+
+    <EditText
+        android:id="@+id/userSetImageName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.695" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Name of File:"
+        android:textColor="#EF6C00"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.637" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

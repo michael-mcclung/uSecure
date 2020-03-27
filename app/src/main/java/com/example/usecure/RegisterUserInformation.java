@@ -1,9 +1,5 @@
 package com.example.usecure;
 
-import android.widget.EditText;
-
-import java.util.Random;
-
 public class RegisterUserInformation {
 
     public Object voicePath;
