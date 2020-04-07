@@ -33,4 +33,90 @@
             app:layout_constraintVertical_bias="0.888" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="608dp"
+        android:text="Contact us:"
+        android:textSize="20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="240dp"
+        android:layout_height="29dp"
+        android:text="uSecure@gmail.com"
+        android:textSize="20"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="532dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="165dp"
+        android:layout_height="31dp"
+        android:text="1-800-999-9999"
+        android:textSize="20"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="577dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact use by email or by phone:"
+        android:textSize="16"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="489dp" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter you email address"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="324dp" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="211dp" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Reason"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="269dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="16"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="166dp"
+        tools:text="Submit a ticket:" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SUBMIT"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="400dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
