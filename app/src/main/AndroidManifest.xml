@@ -22,7 +22,6 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".UploadPhotoActivity"></activity>
         <activity android:name=".ContactUsActivity" />
-        <activity android:name=".AppearenceActivity" />
         <activity android:name=".NotificationsActivity" />
 
         <service android:name=".NotificationsActivity">

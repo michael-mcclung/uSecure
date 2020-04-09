@@ -9,42 +9,45 @@
 
     <Button
         android:id="@+id/doorControlBtn"
-        android:layout_width="215dp"
-        android:layout_height="46dp"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
         android:background="#87cefa"
         android:text="Door Lock Control"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626" />
+        app:layout_constraintVertical_bias="0.59" />
 
     <Button
         android:id="@+id/securityCamFeedBtn"
-        android:layout_width="215dp"
-        android:layout_height="46dp"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
         android:background="#87cefa"
         android:text="Security Camera Feed"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.433" />
+        app:layout_constraintVertical_bias="0.373" />
 
     <Button
-        android:id="@+id/settingsBtn"
-        android:layout_width="210dp"
-        android:layout_height="46dp"
+        android:id="@+id/settingsBtn2"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
         android:background="#87cefa"
         android:text="Settings"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727" />
+        app:layout_constraintVertical_bias="0.699" />
 
     <Button
         android:id="@+id/emergencyBtn"
@@ -57,20 +60,21 @@
         app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.927" />
+        app:layout_constraintVertical_bias="0.918" />
 
     <Button
         android:id="@+id/voiceCommandBtn"
-        android:layout_width="215dp"
-        android:layout_height="46dp"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
         android:background="#87cefa"
         android:text="Voice Command"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.524" />
+        app:layout_constraintVertical_bias="0.482" />
 
     <TextView
         android:id="@+id/homeText"
@@ -84,20 +88,21 @@
         app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.213" />
+        app:layout_constraintVertical_bias="0.172" />
 
     <Button
         android:id="@+id/logoutBtn"
-        android:layout_width="212dp"
-        android:layout_height="48dp"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
         android:background="#87cefa"
         android:text="Logout"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.828" />
+        app:layout_constraintVertical_bias="0.807" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

@@ -13,6 +13,7 @@
         android:layout_height="62dp"
         android:background="#0000ff"
         android:orientation="vertical"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -39,36 +40,65 @@
         android:layout_height="48dp"
         android:text="Pair Device"
         android:textColor="#FFFFFF"
-        android:textSize="30"
-        tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="123dp" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="123dp"
-        android:layout_height="49dp"
-        android:background="#03A9F4"
-        android:text="Pair"
-        android:textSize="18"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="509dp" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="123dp"
-        android:layout_height="49dp"
-        android:background="#03A9F4"
-        android:text="Find Device"
-        android:textSize="18"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="428dp" />
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.222" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="157dp"
         android:layout_height="172dp"
-        app:srcCompat="@mipmap/ic_launcher_foreground"
-        tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="198dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.427"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
+
+    <Button
+        android:id="@+id/settingsBtn4"
+        android:layout_width="123dp"
+        android:layout_height="49dp"
+        android:background="#87cefa"
+        android:text="SETTINGS"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.838" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="123dp"
+        android:layout_height="49dp"
+        android:background="#87cefa"
+        android:text="Pair"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.843"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="123dp"
+        android:layout_height="49dp"
+        android:background="#87cefa"
+        android:text="Find Device"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

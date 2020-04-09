@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,12 +39,13 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         signinbtn = (Button) findViewById( R.id.signinBtn );
-        signinbtn.setOnClickListener( new View.OnClickListener() {
+        signinbtn.setOnTouchListener( new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
                 loginUserAccount();
+                return false;
             }
-        });
+        } );
 
         createBtn = (Button) findViewById( R.id.createBtn );
         createBtn.setOnClickListener( new View.OnClickListener() {

@@ -35,16 +35,87 @@
 
     <Button
         android:id="@+id/manageBtn"
-        android:layout_width="224dp"
-        android:layout_height="52dp"
-        android:text="MANAGE USERS"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
         android:background="#87cefa"
+        android:text="MANAGE USERS"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.438"
+        app:layout_constraintHorizontal_bias="0.44"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.387" />
+        app:layout_constraintVertical_bias="0.338" />
+
+    <Button
+        android:id="@+id/notificationsBtn"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
+        android:background="#87cefa"
+        android:text="NOTIFICATIONS"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.685" />
+
+    <Button
+        android:id="@+id/passKeyBtn"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
+        android:background="#87cefa"
+        android:text="CHANGE PASSKEY"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.567" />
+
+    <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
+        android:background="#87cefa"
+        android:text="HOME"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.909" />
+
+    <Button
+        android:id="@+id/contactUsBtn"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
+        android:background="#87cefa"
+        android:text="CONTACT US"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.798" />
+
+    <Button
+        android:id="@+id/pairDeviceBtn"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
+        android:background="#87cefa"
+        android:text="PAIR DEVICE"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.448" />
 
     <TextView
         android:id="@+id/settingsTextView"
@@ -55,61 +126,9 @@
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.254" />
-
-    <Button
-        android:id="@+id/pairDeviceBtn"
-        android:layout_width="220dp"
-        android:layout_height="54dp"
-        android:text="PAIR DEVICE"
-        android:background="#87cefa"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
-
-    <Button
-        android:id="@+id/passKeyBtn"
-        android:layout_width="217dp"
-        android:layout_height="47dp"
-        android:background="#87cefa"
-        android:text="CHANGE PASSKEY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.438"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.616" />
-
-    <Button
-        android:id="@+id/notificationsBtn"
-        android:layout_width="216dp"
-        android:layout_height="49dp"
-        android:background="#87cefa"
-        android:text="NOTIFICATIONS"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.731" />
-
-    <Button
-        android:id="@+id/contactUsBtn"
-        android:layout_width="211dp"
-        android:layout_height="45dp"
-        android:background="#87cefa"
-        android:text="CONTACT US"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.455"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.839" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.171" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

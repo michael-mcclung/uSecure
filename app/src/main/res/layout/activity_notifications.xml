@@ -7,6 +7,18 @@
     android:background="#001540"
     tools:context=".NotificationsActivity">
 
+    <Button
+        android:id="@+id/settingsBtn2"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
+        android:background="#87cefa"
+        android:text="SETTINGS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.801" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="402dp"
@@ -33,40 +45,55 @@
             app:layout_constraintVertical_bias="0.888" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="183dp"
+        android:layout_height="35dp"
+        android:text="NOTIFICATIONS"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.295" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="195dp"
+        android:layout_height="22dp"
+        android:text="Pop-up Notifications "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.436" />
+
     <Switch
         android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Motion Notifications "
-        android:textSize="16"
-        tools:layout_editor_absoluteX="102dp"
-        tools:layout_editor_absoluteY="220dp" />
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pop-up Notifications "
-        android:textSize="16"
-        tools:layout_editor_absoluteX="102dp"
-        tools:layout_editor_absoluteY="176dp" />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.538" />
 
     <Switch
         android:id="@+id/switch3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="188dp"
+        android:layout_height="22dp"
         android:text="Updates                        "
-        android:textSize="16"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="266dp" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="184dp"
-        android:layout_height="32dp"
-        android:text="Notifications:"
-        android:textSize="24"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="72dp" />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.639" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

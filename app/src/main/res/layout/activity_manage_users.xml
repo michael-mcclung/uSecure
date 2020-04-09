@@ -11,16 +11,16 @@
         android:id="@+id/manageUserTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
         android:text="Manage Users"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.091" />
+        app:layout_constraintVertical_bias="0.134" />
 
     <EditText
-        android:id="@+id/addressText"
+        android:id="@+id/addressEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -181,55 +181,55 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/uploadUserPhotoBtn"
-        android:layout_width="173dp"
+        android:id="@+id/deleteUserBtn"
+        android:layout_width="101dp"
         android:layout_height="51dp"
         android:background="#87cefa"
-        android:text="UPLOAD USER PHOTO"
+        android:text="DELETE USER"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.966" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.841" />
 
     <Button
         android:id="@+id/backToSettingsBtn"
-        android:layout_width="172dp"
-        android:layout_height="49dp"
+        android:layout_width="101dp"
+        android:layout_height="51dp"
         android:background="#87cefa"
         android:text="BACK TO SETTINGS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.138"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.963" />
 
     <Button
-        android:id="@+id/deleteUserBtn"
-        android:layout_width="176dp"
-        android:layout_height="52dp"
-        android:background="#87cefa"
-        android:text="DELETE USER"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.874" />
-
-    <Button
         android:id="@+id/updateUserBtn"
-        android:layout_width="173dp"
-        android:layout_height="54dp"
+        android:layout_width="101dp"
+        android:layout_height="51dp"
         android:background="#87cefa"
         android:text="UPDATE USER"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintHorizontal_bias="0.832"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.874" />
+        app:layout_constraintVertical_bias="0.841" />
+
+    <Button
+        android:id="@+id/uploadUserPhotoBtn"
+        android:layout_width="101dp"
+        android:layout_height="51dp"
+        android:background="#87cefa"
+        android:text="UPLOAD USER PHOTO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.832"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.966" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

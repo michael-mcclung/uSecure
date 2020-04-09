@@ -35,59 +35,30 @@
 
     <TextView
         android:id="@+id/doorControlTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DOOR CONTROL"
+        android:layout_width="212dp"
+        android:layout_height="109dp"
+        android:text="   DOOR               CONTROL"
         android:textColor="#FFFFFF"
         android:textSize="44sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.608"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.195" />
-
-    <ToggleButton
-        android:id="@+id/doorControlToggle"
-        android:layout_width="169dp"
-        android:layout_height="70dp"
-        android:text="UNLOCK"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#C62828"
-        android:textColorHint="#0020FF"
-        android:textColorLink="#5DFF3F"
-        android:textOff="LOCK"
-        android:textOn="UNLOCK"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.909" />
-
-    <Spinner
-        android:id="@+id/spinnerDropDown"
-        android:layout_width="200dp"
-        android:layout_height="53dp"
-        android:background="#ffffff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.752" />
+        app:layout_constraintVertical_bias="0.146" />
 
     <TextView
-        android:id="@+id/addNewDoorText"
+        android:id="@+id/doorNameTextView"
         android:layout_width="243dp"
         android:layout_height="40dp"
         android:text="ADD DOOR NAME"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintHorizontal_bias="0.63"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.354" />
+        app:layout_constraintVertical_bias="0.316" />
 
     <EditText
         android:id="@+id/nameOfNewDoorText"
@@ -99,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintVertical_bias="0.377" />
 
     <Button
         android:id="@+id/addNewDoorBtn"
@@ -107,11 +78,75 @@
         android:layout_height="52dp"
         android:background="#87cefa"
         android:text="ADD DOOR"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.547" />
+        app:layout_constraintVertical_bias="0.471" />
 
+    <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="163dp"
+        android:layout_height="50dp"
+        android:background="#87cefa"
+        android:text="HOME"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.933" />
+
+    <Spinner
+        android:id="@+id/doorSpinner"
+        android:layout_width="267dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.569"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.684" />
+
+    <TextView
+        android:id="@+id/outputSpinnerTv"
+        android:layout_width="187dp"
+        android:layout_height="46dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.563" />
+
+    <ToggleButton
+        android:id="@+id/doorControlToggle"
+        android:layout_width="167dp"
+        android:layout_height="64dp"
+        android:text="UNLOCK"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#C62828"
+        android:textColorHint="#0020FF"
+        android:textColorLink="#5DFF3F"
+        android:textOff="UNLOCK"
+        android:textOn="LOCK"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.81" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

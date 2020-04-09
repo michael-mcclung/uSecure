@@ -3,24 +3,18 @@ package com.example.usecure;
 
 public class ArrayListOfDoors {
 
-    private String doorName;
-    private String audioId;
+    private String doorId;
     private int switchState = 0;
+    int currentSwitchState = getswitchState();
 
-    public ArrayListOfDoors() {
-
-    }
-
-    public ArrayListOfDoors(String audioId, String doorName, int switchState) {
-        this.doorName = doorName;
-        this.audioId = audioId;
+    public ArrayListOfDoors(String doorId, int switchState) {
+        this.doorId = doorId;
         this.switchState = switchState;
     }
 
-    public String getdoorName() {
-        return doorName;
+    public ArrayListOfDoors(int currentSwitchState){
+        this.currentSwitchState = currentSwitchState;
     }
-
     public int getswitchState() {
         return switchState;
     }

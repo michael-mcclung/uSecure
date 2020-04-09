@@ -1,9 +1,7 @@
 package com.example.usecure;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,7 +20,7 @@ import java.util.Locale;
 
 public class VoiceCommandActivity extends AppCompatActivity {
 
-    private Button recordBtn, homeBtn, deleteRecordingBtn, saveBtn;
+    private Button recordBtn, homeBtn, deleteRecordingBtn;
     private TextView autoCompleteText, nameOfRecordingText = null, textOutput;
 
     private DatabaseReference mDatabase;
@@ -41,19 +38,9 @@ public class VoiceCommandActivity extends AppCompatActivity {
         nameOfRecordingText = (TextView) findViewById( R.id.nameOfRecordingText );
         textOutput = (TextView) findViewById( R.id.textOutput );
 
-        saveBtn = (Button) findViewById( R.id.saveBtn );
         deleteRecordingBtn = (Button) findViewById( R.id.deleteRecordingBtn );
         recordBtn = (Button) findViewById( R.id.recordBtn );
-        homeBtn = (Button) findViewById( R.id.homeBtn );
-
-        saveBtn.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String getFileName = textOutput.getText().toString();
-                mDatabase.child( getFileName );
-            }
-        } );
+        homeBtn = (Button) findViewById( R.id.settingsBtn2 );
 
         recordBtn.setOnClickListener( new View.OnClickListener() {
             @Override

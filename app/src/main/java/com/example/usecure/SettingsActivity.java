@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SettingsActivity extends AppCompatActivity {
 
     Button manageBtn, pairDeviceBtn, passKeyBtn;
-    Button notificationsBtn, appearBtn, contactUsBtn;
+    Button notificationsBtn, homeBtn, contactUsBtn;
     FirebaseAuth mAuth;
 
     @Override
@@ -60,21 +60,21 @@ public class SettingsActivity extends AppCompatActivity {
             }
         } );
 
-        appearBtn = (Button) findViewById( R.id.appearBtn );
-        appearBtn.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent doorControlIntent = new Intent( getApplicationContext(), AppearenceActivity.class );
-                startActivity( doorControlIntent );
-            }
-        } );
-
         contactUsBtn = (Button) findViewById( R.id.contactUsBtn );
         contactUsBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent doorControlIntent = new Intent( getApplicationContext(), ContactUsActivity.class );
                 startActivity( doorControlIntent );
+            }
+        } );
+
+        homeBtn = (Button) findViewById( R.id.homeBtn );
+        homeBtn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent( getApplicationContext(), Home.class );
+                startActivity( homeIntent );
             }
         } );
     }
