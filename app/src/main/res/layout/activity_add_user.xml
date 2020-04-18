@@ -5,24 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#001540"
-    tools:context=".ManageUsersActivity">
+    tools:context=".AddUser">
 
-    <TextView
-        android:id="@+id/manageUserTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Manage Users"
-        android:textSize="40sp"
+    <Button
+        android:id="@+id/backToSettingsBtn2"
+        android:layout_width="101dp"
+        android:layout_height="51dp"
+        android:background="#87cefa"
+        android:text="BACK TO USER MANAGER"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.134" />
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.902" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="412dp"
-        android:layout_height="63dp"
+        android:layout_width="413dp"
+        android:layout_height="61dp"
         android:background="#0000ff"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,76 +45,94 @@
             app:layout_constraintVertical_bias="0.888" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/deleteUserBtn"
-        android:layout_width="101dp"
-        android:layout_height="51dp"
-        android:background="#87cefa"
-        android:text="DELETE USER"
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="133dp"
+        android:layout_height="56dp"
+        android:text="ADD USER"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.841" />
+        app:layout_constraintVertical_bias="0.133" />
 
     <Button
-        android:id="@+id/backToSettingsBtn"
-        android:layout_width="101dp"
-        android:layout_height="51dp"
-        android:background="#87cefa"
-        android:text="BACK TO SETTINGS"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.963" />
-
-    <Button
-        android:id="@+id/updateUserBtn"
+        android:id="@+id/adduser"
         android:layout_width="101dp"
         android:layout_height="51dp"
         android:background="#87cefa"
         android:text="ADD USER"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.832"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.841" />
-
-    <Button
-        android:id="@+id/uploadUserPhotoBtn"
-        android:layout_width="101dp"
-        android:layout_height="51dp"
-        android:background="#87cefa"
-        android:text="UPLOAD USER PHOTO"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.832"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.966" />
+        app:layout_constraintVertical_bias="0.775" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/repw1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter Username to Delete"
+        android:hint="Re-enter Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.641" />
+
+    <EditText
+        android:id="@+id/name1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Name"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintVertical_bias="0.352" />
 
-    <ListView
-        android:id="@+id/ListView_1"
-        android:layout_width="match_parent"
-        android:layout_height="347dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="146dp" />
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.265" />
 
+    <EditText
+        android:id="@+id/email1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.448" />
+
+    <EditText
+        android:id="@+id/pw1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.545" />
 </androidx.constraintlayout.widget.ConstraintLayout>
