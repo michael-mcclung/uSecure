@@ -1,26 +1,16 @@
+/*packages*/
 package com.example.usecure;
 
-import android.widget.TextView;
-
+/*class used to update audio recordings on firebase realtime database*/
 public class AudioFiles {
 
+    /*variables*/
     private String nameOfTextFile, speechToText, audioId;
 
-    public AudioFiles() {
-
-    }
-
+    /*function used to update firebase realtime database*/
     public AudioFiles(String audioId, String nameOfTextFile, String speechToText) {
         this.nameOfTextFile = nameOfTextFile;
         this.speechToText = speechToText;
         this.audioId = audioId;
-    }
-
-    public String getNameOfTextFile() {
-        return nameOfTextFile;
-    }
-
-    public String getSpeechToText() {
-        return speechToText;
     }
 }

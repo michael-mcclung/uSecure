@@ -1,23 +1,14 @@
+// packages
 package com.example.usecure;
 
+// register user information class
 public class RegisterUserInformation {
 
-    public Object voicePath;
+    // vaiables
     private String email, password, lname, address, phoneNum;
     String fname;
 
-    public RegisterUserInformation() {
-        this.fname = fname;
-        String fname1 = getFname();
-        setFname( fname1 );
-    }
-
-    public RegisterUserInformation(String fname) {
-        this.fname = fname;
-        String fname1 = getFname();
-        setFname( fname1 );
-    }
-
+    // function used to set user information
     public RegisterUserInformation(String email, String password, String fname, String lname, String address, String phoneNum) {
         this.email = email;
         this.password = password;
@@ -27,51 +18,14 @@ public class RegisterUserInformation {
         this.phoneNum = phoneNum;
     }
 
+    // getting user email
     public String getEmail() {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String getFname() {
-        return fname;
-    }
-
-    public String getLname() {
-        return lname;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPhoneNum() {
-        return phoneNum;
-    }
-
+    // setting user email
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
 }
