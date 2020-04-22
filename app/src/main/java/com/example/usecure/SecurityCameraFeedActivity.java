@@ -1,24 +1,25 @@
+// packages
 package com.example.usecure;
 
+// imports
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.util.Log;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+// security camera feed activity
 public class SecurityCameraFeedActivity extends AppCompatActivity {
 
-    @Override
+    @Override // set camera feed page
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_security_camera_feed );
     }
 
+    // function used to get real time video from firebase database for camera feed
     public void readFeedRealTimeDatabase(){
 
         // Write a message to the database
