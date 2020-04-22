@@ -1,28 +1,32 @@
+// packages
 package com.example.usecure;
 
+// imports
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+// add user page
 public class AddUser extends AppCompatActivity {
 
+    // vairables
     Button addusr, back;
     EditText username, name, email, password;
     SubUser NewUser;
     private DatabaseReference mDatabase;
 
-    @Override
+    @Override // start add user page
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
+
+        // initiate variables
         username = (EditText) findViewById(R.id.name);
         name = (EditText) findViewById(R.id.name1);
         email = (EditText) findViewById(R.id.email1);
@@ -32,6 +36,7 @@ public class AddUser extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child("Sub Users");
         NewUser = new SubUser();
 
+        // add user information
         addusr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +49,7 @@ public class AddUser extends AppCompatActivity {
             }
         });
 
+        // go back to manage user page
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
