@@ -25,7 +25,7 @@ Android Studio via [termianal](https://developer.android.com/studio/install)
 * **Enrique Cervantes** - *Android Application* - [Github](https://github.com/encervan1998)
 * **David Aponik** - *Raspberry Pi - Voice Recognition* - [Github](https://github.com/daponik97)
 * **John Yucetas** - *Raspberry Pi - Facial Recognition* - [Github](https://github.com/JohnYucetas)
-* **Ronak Joshi** - *Firebase Database* - [Github](https://github.com/ronakjoshittu)
+* **Ronak Joshi** - *Firebase Database, pass code and encryption* - [Github](https://github.com/ronakjoshittu)
 
 
 ## Acknowledgments
