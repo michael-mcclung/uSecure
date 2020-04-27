@@ -88,7 +88,7 @@
         app:layout_constraintVertical_bias="0.851" />
 
     <Button
-        android:id="@+id/backToSignUpBtn"
+        android:id="@+id/backToSettingsBtn"
         android:layout_width="114dp"
         android:layout_height="53dp"
         android:background="#87cefa"

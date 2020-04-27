@@ -48,20 +48,6 @@
         app:layout_constraintVertical_bias="0.338" />
 
     <Button
-        android:id="@+id/notificationsBtn"
-        android:layout_width="211dp"
-        android:layout_height="45dp"
-        android:background="#87cefa"
-        android:text="NOTIFICATIONS"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.685" />
-
-    <Button
         android:id="@+id/passKeyBtn"
         android:layout_width="211dp"
         android:layout_height="45dp"
@@ -73,7 +59,7 @@
         app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.567" />
+        app:layout_constraintVertical_bias="0.459" />
 
     <Button
         android:id="@+id/homeBtn"
@@ -87,7 +73,21 @@
         app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.909" />
+        app:layout_constraintVertical_bias="0.801" />
+
+    <Button
+        android:id="@+id/notificationsBtn"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
+        android:background="#87cefa"
+        android:text="NOTIFICATIONS"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.577" />
 
     <Button
         android:id="@+id/contactUsBtn"
@@ -101,21 +101,7 @@
         app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.798" />
-
-    <Button
-        android:id="@+id/pairDeviceBtn"
-        android:layout_width="211dp"
-        android:layout_height="45dp"
-        android:background="#87cefa"
-        android:text="PAIR DEVICE"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.448" />
+        app:layout_constraintVertical_bias="0.69" />
 
     <TextView
         android:id="@+id/settingsTextView"

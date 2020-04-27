@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".AddUser"></activity>
+        <activity android:name=".UpdateUserPhotoActivity"></activity>
+        <activity android:name=".AddUser" />
         <activity android:name=".UploadPhotoActivity" />
         <activity android:name=".ContactUsActivity" />
         <activity android:name=".NotificationsActivity" />
@@ -32,7 +33,6 @@
         </service>
 
         <activity android:name=".PassKeyActivity" />
-        <activity android:name=".PairDeviceActivity" />
         <activity android:name=".ManageUsersActivity" />
         <activity android:name=".EmergencyCallActivity" />
         <activity android:name=".DoorControlActivity" />
