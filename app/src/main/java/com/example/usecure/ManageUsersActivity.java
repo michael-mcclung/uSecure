@@ -17,7 +17,7 @@ public class ManageUsersActivity extends AppCompatActivity {
 
     Button updateUserPhotoBtn, addUserBtn, backToSettingsBtn, deleteUserBtn;
     ListView users;
-    DatabaseReference mDatabase;
+    DatabaseReference manageUserDatabase;
     ArrayList<String> myArrayList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +29,8 @@ public class ManageUsersActivity extends AppCompatActivity {
 
         users = (ListView) findViewById(R.id.ListView_1);
         users.setAdapter(myArrayAdapter);
-        mDatabase = FirebaseDatabase.getInstance().getReference( "Main User" ).child("Sub Users");
-        mDatabase.addChildEventListener(new ChildEventListener() {
+        manageUserDatabase = FirebaseDatabase.getInstance().getReference( "Main User" ).child("Sub Users");
+        manageUserDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 String value = dataSnapshot.getValue(String.class);

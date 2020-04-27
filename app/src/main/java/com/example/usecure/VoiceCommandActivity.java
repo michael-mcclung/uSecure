@@ -22,8 +22,8 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
     // variables
     private Button recordBtn, homeBtn, deleteRecordingBtn;
-    private TextView autoCompleteText, nameOfRecordingText = null, textOutput;
-    private DatabaseReference mDatabase;
+    private TextView autoCompleteText, nameOfRecordingText = null;
+    private DatabaseReference voiceCommandDatabase;
     private final int SPEECH_RECOGNITION_CODE = 1;
 
     @Override // create voice command page
@@ -32,12 +32,14 @@ public class VoiceCommandActivity extends AppCompatActivity {
         setContentView( R.layout.activity_voice_command );
 
         // initiate variables
-        mDatabase = FirebaseDatabase.getInstance().getReference( "Main User" );
+        voiceCommandDatabase = FirebaseDatabase.getInstance().getReference( "Main User" );
         autoCompleteText = (TextView) findViewById( R.id.autoCompleteText );
         nameOfRecordingText = (TextView) findViewById( R.id.nameOfRecordingText );
         deleteRecordingBtn = (Button) findViewById( R.id.deleteRecordingBtn );
         recordBtn = (Button) findViewById( R.id.recordBtn );
         homeBtn = (Button) findViewById( R.id.settingsBtn2 );
+
+        // start recording speech to text
         recordBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,10 +54,10 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
                 String name = autoCompleteText.getText().toString();
                 String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference deleteAudio = mDatabase.child( userUid ).child( "Voice Recognition" ).child( name );
+                DatabaseReference deleteAudio = voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child( name );
 
                 if (deleteAudio != null) {
-                    mDatabase.removeValue( (DatabaseReference.CompletionListener) deleteAudio );
+                    voiceCommandDatabase.removeValue( (DatabaseReference.CompletionListener) deleteAudio );
                     Toast.makeText( VoiceCommandActivity.this, "Audio deleted", Toast.LENGTH_LONG ).show();
                 } else {
                     Toast.makeText( VoiceCommandActivity.this, "Audio not found", Toast.LENGTH_LONG ).show();
@@ -100,13 +102,14 @@ public class VoiceCommandActivity extends AppCompatActivity {
                     // variables
                     ArrayList<String> voiceInText = data.getStringArrayListExtra( RecognizerIntent.EXTRA_RESULTS );
                     String text = voiceInText.get( 0 );
-                    String id = mDatabase.push().getKey();
-                    String name = nameOfRecordingText.getText().toString().trim();
+                    String id = voiceCommandDatabase.push().getKey();
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    String name = nameOfRecordingText.getText().toString();
+                    //String vRec = voiceCommandDatabase.child(userUid).child("Voice Recognition").toString();
 
                     // create new audio file information / add to firebase realtime database
-                    AudioFiles af = new AudioFiles( id, name, text );
-                    mDatabase.child( userUid ).child( "Voice Recognition" ).child( name ).setValue( af );
+                    AudioFiles af = new AudioFiles( id, text );
+                    voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child(name).setValue( af );  // gets to here and stops
 
                     // alert user of completion
                     Toast.makeText( this, "Audio name and audio added", Toast.LENGTH_LONG ).show();

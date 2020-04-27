@@ -27,7 +27,7 @@ public class DoorControlActivity extends AppCompatActivity {
     private Button addNewDoorBtn, homeBtn;
     private Spinner doorSpinner;
     private EditText nameOfNewDoorText;
-    private DatabaseReference mDatabase;
+    private DatabaseReference doorControlDatabase;
     private ArrayAdapter spinnerArrayAdapter;
     private ArrayList<String> doorOptions = new ArrayList<String>();
 
@@ -44,7 +44,7 @@ public class DoorControlActivity extends AppCompatActivity {
         homeBtn = (Button) findViewById( R.id.homeBtn );
 
         // initialize reference for Firebase database
-        mDatabase = FirebaseDatabase.getInstance().getReference( "Main User");
+        doorControlDatabase = FirebaseDatabase.getInstance().getReference( "Main User");
 
         // creating the array adapter instance having the list of options
         spinnerArrayAdapter = new ArrayAdapter( this, android.R.layout.simple_spinner_item, doorOptions );
@@ -68,7 +68,7 @@ public class DoorControlActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // variables
-                String userID = mDatabase.push().getKey();
+                String userID = doorControlDatabase.push().getKey();
                 String getDoorName = nameOfNewDoorText.getText().toString();
                 int switchState = 0;
                 String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -76,7 +76,7 @@ public class DoorControlActivity extends AppCompatActivity {
                 // add door name given by user, update ArrayListOfDoors and firebase database
                 doorOptions.add(getDoorName);
                 ArrayListOfDoors addToList = new ArrayListOfDoors( userID, switchState );
-                mDatabase.child( userUid ).child( "Door Control" ).child( getDoorName ).setValue( addToList );
+                doorControlDatabase.child( userUid ).child( "Door Control" ).child( getDoorName ).setValue( addToList );
 
                 // let user know doors were added
                 Toast.makeText( DoorControlActivity.this, "Door Added", Toast.LENGTH_SHORT ).show();
@@ -119,12 +119,12 @@ public class DoorControlActivity extends AppCompatActivity {
                 if (isChecked)
                 {
                     // used to turn switch state of doors on
-                    mDatabase.child( userUid ).child( "Door Control" ).child( spinnerSelected ).setValue( "0" );
+                    doorControlDatabase.child( userUid ).child( "Door Control" ).child( spinnerSelected ).setValue( "0" );
                 }
                 else
                 {
                     // used to turn switch state of doors off
-                    mDatabase.child( userUid ).child( "Door Control" ).child( spinnerSelected ).setValue( "1" );
+                    doorControlDatabase.child( userUid ).child( "Door Control" ).child( spinnerSelected ).setValue( "1" );
                 }
             }
         } );
