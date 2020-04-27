@@ -37,68 +37,14 @@
 
     <ImageView
         android:id="@+id/imgView"
-        android:layout_width="237dp"
-        android:layout_height="254dp"
+        android:layout_width="217dp"
+        android:layout_height="312dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.249" />
-
-    <Button
-        android:id="@+id/btnUpload"
-        android:layout_width="111dp"
-        android:layout_height="52dp"
-        android:layout_weight="1"
-        android:background="#87cefa"
-        android:text="Upload"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.876"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
-
-    <Button
-        android:id="@+id/btnChoose"
-        android:layout_width="114dp"
-        android:layout_height="53dp"
-        android:layout_weight="1"
-        android:background="#87cefa"
-        android:text="Choose"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.852" />
-
-    <Button
-        android:id="@+id/cameraBtn"
-        android:layout_width="114dp"
-        android:layout_height="55dp"
-        android:background="#87cefa"
-        android:text="TAKE PHOTO"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.876"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.851" />
-
-    <Button
-        android:id="@+id/backToSettingsBtn"
-        android:layout_width="114dp"
-        android:layout_height="53dp"
-        android:background="#87cefa"
-        android:text="BACK TO SIGNUP"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
 
     <EditText
         android:id="@+id/userSetImageName"
@@ -110,7 +56,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.701" />
+
+    <Button
+        android:id="@+id/btnChoose"
+        android:layout_width="114dp"
+        android:layout_height="53dp"
+        android:layout_weight="1"
+        android:background="#87cefa"
+        android:text="Choose"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82" />
+
+    <Button
+        android:id="@+id/backToSettingsBtn"
+        android:layout_width="114dp"
+        android:layout_height="53dp"
+        android:background="#87cefa"
+        android:text="BACK TO SIGNUP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.952" />
 
     <TextView
         android:id="@+id/textView"
@@ -123,6 +96,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.637" />
+        app:layout_constraintVertical_bias="0.64" />
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="111dp"
+        android:layout_height="52dp"
+        android:layout_weight="1"
+        android:background="#87cefa"
+        android:text="Upload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.843"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.817" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

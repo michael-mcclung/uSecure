@@ -5,15 +5,24 @@ package com.example.usecure;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -22,7 +31,6 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
     // variables
     private Button recordBtn, homeBtn, deleteRecordingBtn;
-    private TextView autoCompleteText, nameOfRecordingText = null;
     private DatabaseReference voiceCommandDatabase;
     private final int SPEECH_RECOGNITION_CODE = 1;
 
@@ -33,8 +41,6 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
         // initiate variables
         voiceCommandDatabase = FirebaseDatabase.getInstance().getReference( "Main User" );
-        autoCompleteText = (TextView) findViewById( R.id.autoCompleteText );
-        nameOfRecordingText = (TextView) findViewById( R.id.nameOfRecordingText );
         deleteRecordingBtn = (Button) findViewById( R.id.deleteRecordingBtn );
         recordBtn = (Button) findViewById( R.id.recordBtn );
         homeBtn = (Button) findViewById( R.id.settingsBtn2 );
@@ -53,13 +59,13 @@ public class VoiceCommandActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // get information
-                String name = autoCompleteText.getText().toString();
                 String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                String deleteAudio = voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child( name ).toString();
-
+                //String deleteAudio = voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child("Door Name").toString();
+                
                 // remove value form firebase databse and let user know audio deleted
-                voiceCommandDatabase.getRef().removeValue();
-                //Toast.makeText( VoiceCommandActivity.this, "Audio deleted", Toast.LENGTH_LONG ).show();
+                DatabaseReference deleteVoiceRef = FirebaseDatabase.getInstance().getReference().child("Main User").child( userUid ).child( "Voice Recognition" );
+                deleteVoiceRef.child("Door Name").getRef().removeValue();
+                Toast.makeText( VoiceCommandActivity.this, "Audio deleted", Toast.LENGTH_LONG ).show();
 
             }
         } );
@@ -103,11 +109,10 @@ public class VoiceCommandActivity extends AppCompatActivity {
                     String text = voiceInText.get( 0 );
                     String id = voiceCommandDatabase.push().getKey();
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    String name = nameOfRecordingText.getText().toString().trim();
 
                     // create new audio file information / add to firebase realtime database
                     AudioFiles af = new AudioFiles( id, text );
-                    voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child(name).setValue( text );
+                    voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child("Door Name").setValue( text );
 
                     // alert user of completion
                     Toast.makeText( this, "Audio name and audio added", Toast.LENGTH_LONG ).show();
