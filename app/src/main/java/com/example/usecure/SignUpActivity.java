@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     // variables
     private FirebaseAuth mAuth;
-    EditText newEmailText, newPasswordText, fname, lname, address, phoneNum, firstName;
+    EditText newEmailText, newPasswordText, fname, lname, address, phoneNum;
     Button goBackLogInBtn, registerBtn, uploadPhotoBtn;
 
     // firebase database reference
@@ -61,12 +62,13 @@ public class SignUpActivity extends AppCompatActivity {
         } );
 
         // call register user function
-        registerBtn.setOnClickListener( new View.OnClickListener() {
+        registerBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
                 signUpUser();
+                return false;
             }
-        } );
+        });
     }
 
     // register user function
@@ -103,13 +105,15 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 // if password is less than 0 then alert user that password has a criteria
-                if (onClickPassword.length() < 8) {
+                if (onClickPassword.length() < 6) {
                     Toast.makeText( getApplicationContext(), "Password must be at least 6 characters", Toast.LENGTH_LONG ).show();
 
                   // else validate user's credentials
                 } else {
                     mAuth.createUserWithEmailAndPassword( onClickEmail, onClickPassword )
                             .addOnCompleteListener( SignUpActivity.this, new OnCompleteListener<AuthResult>() {
+
+                                @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                                     // if log in is invalid then alert user with an error messege
@@ -130,7 +134,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                                         // create new logging in credentials, upload to firebase realtime database amd alert user of new account created
                                         RegisterUserInformation register = new RegisterUserInformation( email, password, first, last, add, number );
-                                        signUpDatabase.child( userUid ).child( "Login Information" ).setValue( register );
+                                        signUpDatabase.child( userUid ).child( "Login Information" ).setValue( "new user" );
                                         Toast.makeText( getApplicationContext(), "New Account Created!", Toast.LENGTH_LONG ).show();
 
                                         // once all is validated / created then go to log in page
