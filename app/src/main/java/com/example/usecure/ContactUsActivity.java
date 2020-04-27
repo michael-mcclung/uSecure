@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -18,7 +19,7 @@ public class ContactUsActivity extends AppCompatActivity {
     Button submitBtn;
     ticket support;
     EditText name, email, reason;
-    private DatabaseReference mDatabase;
+    private DatabaseReference contactUsDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,8 @@ public class ContactUsActivity extends AppCompatActivity {
         reason = (EditText) findViewById(R.id.editText5);
         settingsBtn = (Button) findViewById( R.id.settingsBtn2 );
         submitBtn = (Button) findViewById(R.id.submitBtn);
-        mDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child("Support tickets");
+        String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        contactUsDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child(userUid).child("Support tickets");
         support = new ticket();
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
@@ -39,7 +41,7 @@ public class ContactUsActivity extends AppCompatActivity {
                 support.setEmail(email.getText().toString().trim());
                 support.setName(name.getText().toString().trim());
                 support.setReason(reason.getText().toString().trim());
-                mDatabase.push().setValue(support);
+                contactUsDatabase.push().setValue(support);
                 Toast.makeText(ContactUsActivity.this, "Ticket sent", Toast.LENGTH_LONG).show();
             }
         });

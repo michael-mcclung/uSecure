@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -19,7 +21,7 @@ public class AddUser extends AppCompatActivity {
     Button addusr, back;
     EditText username, name, email, password;
     SubUser NewUser;
-    private DatabaseReference mDatabase;
+    private DatabaseReference addUserDatabase;
 
     @Override // start add user page
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,8 @@ public class AddUser extends AppCompatActivity {
         password = (EditText) findViewById(R.id.pw1);
         back = (Button) findViewById(R.id.backToSettingsBtn2);
         addusr = (Button) findViewById(R.id.adduser);
-        mDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child("Sub Users");
+        String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        addUserDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child(userUid).child("Sub Users");
         NewUser = new SubUser();
 
         // add user information
@@ -44,7 +47,7 @@ public class AddUser extends AppCompatActivity {
                 NewUser.setName(name.getText().toString().trim());
                 NewUser.setEmail(email.getText().toString().trim());
                 NewUser.setPassword(password.getText().toString().trim());
-                mDatabase.child(NewUser.getUsername()).setValue(NewUser);
+                addUserDatabase.child(NewUser.getUsername()).setValue(NewUser);
                 Toast.makeText(AddUser.this,"User Added", Toast.LENGTH_LONG).show();
             }
         });

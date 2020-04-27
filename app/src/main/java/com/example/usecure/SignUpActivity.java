@@ -27,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button goBackLogInBtn, registerBtn, uploadPhotoBtn;
 
     // firebase database reference
-    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference( "Main User");
+    DatabaseReference signUpDatabase = FirebaseDatabase.getInstance().getReference( "Main User");
 
     @Override // start sign up page
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                                         // create new logging in credentials, upload to firebase realtime database amd alert user of new account created
                                         RegisterUserInformation register = new RegisterUserInformation( email, password, first, last, add, number );
-                                        mDatabase.child( userUid ).child( "Login Information" ).setValue( register );
+                                        signUpDatabase.child( userUid ).child( "Login Information" ).setValue( register );
                                         Toast.makeText( getApplicationContext(), "New Account Created!", Toast.LENGTH_LONG ).show();
 
                                         // once all is validated / created then go to log in page
