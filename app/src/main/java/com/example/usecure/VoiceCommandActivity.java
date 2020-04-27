@@ -52,16 +52,15 @@ public class VoiceCommandActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // get information
                 String name = autoCompleteText.getText().toString();
                 String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference deleteAudio = voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child( name );
+                String deleteAudio = voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child( name ).toString();
 
-                if (deleteAudio != null) {
-                    voiceCommandDatabase.removeValue( (DatabaseReference.CompletionListener) deleteAudio );
-                    Toast.makeText( VoiceCommandActivity.this, "Audio deleted", Toast.LENGTH_LONG ).show();
-                } else {
-                    Toast.makeText( VoiceCommandActivity.this, "Audio not found", Toast.LENGTH_LONG ).show();
-                }
+                // remove value form firebase databse and let user know audio deleted
+                voiceCommandDatabase.getRef().removeValue();
+                //Toast.makeText( VoiceCommandActivity.this, "Audio deleted", Toast.LENGTH_LONG ).show();
+
             }
         } );
 
@@ -104,12 +103,11 @@ public class VoiceCommandActivity extends AppCompatActivity {
                     String text = voiceInText.get( 0 );
                     String id = voiceCommandDatabase.push().getKey();
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    String name = nameOfRecordingText.getText().toString();
-                    //String vRec = voiceCommandDatabase.child(userUid).child("Voice Recognition").toString();
+                    String name = nameOfRecordingText.getText().toString().trim();
 
                     // create new audio file information / add to firebase realtime database
                     AudioFiles af = new AudioFiles( id, text );
-                    voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child(name).setValue( af );  // gets to here and stops
+                    voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child(name).setValue( text );
 
                     // alert user of completion
                     Toast.makeText( this, "Audio name and audio added", Toast.LENGTH_LONG ).show();
