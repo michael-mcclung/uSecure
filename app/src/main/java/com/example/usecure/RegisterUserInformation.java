@@ -5,12 +5,8 @@ package com.example.usecure;
 public class RegisterUserInformation {
 
     // vaiables
-    private String email;
-    private String password;
-    private String lname;
-    private String address;
-    private String phoneNum;
-    private String fname;
+    private String email, password, lname;
+    private String address, phoneNum, fname;
 
     // function used to set user information
     public RegisterUserInformation(String email, String password, String fname, String lname, String address, String phoneNum) {

@@ -42,6 +42,12 @@ public class SignUpActivity extends AppCompatActivity {
         uploadPhotoBtn = (Button) findViewById( R.id.uploadPhotoBtn );
         goBackLogInBtn = (Button) findViewById( R.id.goBackLogInBtn );
         registerBtn = (Button) findViewById( R.id.registerBtn );
+        fname = (EditText) findViewById(R.id.firstNameEditText);
+        lname = (EditText) findViewById(R.id.lastNameEditText);
+        newEmailText = (EditText) findViewById(R.id.newEmailText);
+        newPasswordText = (EditText) findViewById(R.id.newPasswordText);
+        address = (EditText) findViewById(R.id.addressEditText);
+        phoneNum = (EditText) findViewById(R.id.phoneEditText);
 
         // go to upload photo page
         uploadPhotoBtn.setOnClickListener( new View.OnClickListener() {
@@ -108,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (onClickPassword.length() < 6) {
                     Toast.makeText( getApplicationContext(), "Password must be at least 6 characters", Toast.LENGTH_LONG ).show();
 
-                  // else validate user's credentials
+                // else validate user's credentials
                 } else {
                     mAuth.createUserWithEmailAndPassword( onClickEmail, onClickPassword )
                             .addOnCompleteListener( SignUpActivity.this, new OnCompleteListener<AuthResult>() {
@@ -117,11 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                                     // if log in is invalid then alert user with an error messege
-                                    if (!task.isSuccessful()) {
-                                        Toast.makeText( SignUpActivity.this, "ERROR", Toast.LENGTH_LONG ).show();
-
-                                      // else validate information
-                                    } else {
+                                    if (task.isSuccessful()) {
 
                                         // variables used to update firebase database
                                         String email = newEmailText.getText().toString();
@@ -134,13 +136,17 @@ public class SignUpActivity extends AppCompatActivity {
 
                                         // create new logging in credentials, upload to firebase realtime database amd alert user of new account created
                                         RegisterUserInformation register = new RegisterUserInformation( email, password, first, last, add, number );
-                                        signUpDatabase.child( userUid ).child( "Login Information" ).setValue( "new user" );
+                                        signUpDatabase.child( userUid ).child( "Login Information" ).setValue( register);
                                         Toast.makeText( getApplicationContext(), "New Account Created!", Toast.LENGTH_LONG ).show();
 
                                         // once all is validated / created then go to log in page
                                         Intent signUpIntent = new Intent( SignUpActivity.this, MainActivity.class );
                                         startActivity( signUpIntent );
                                         finish();
+
+                                     // else validate information
+                                    } else {
+                                        Toast.makeText( SignUpActivity.this, "ERROR", Toast.LENGTH_LONG ).show();
                                     }
                                 }
                             } );
