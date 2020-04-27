@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ManageUsersActivity extends AppCompatActivity {
 
 
-    Button uploadUserPhotoBtn, addUserBtn, backToSettingsBtn, deleteUserBtn;
+    Button updateUserPhotoBtn, addUserBtn, backToSettingsBtn, deleteUserBtn;
     ListView users;
     DatabaseReference mDatabase;
     ArrayList<String> myArrayList = new ArrayList<>();
@@ -24,7 +24,7 @@ public class ManageUsersActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_manage_users );
 
-        uploadUserPhotoBtn = (Button) findViewById( R.id.uploadUserPhotoBtn );
+        updateUserPhotoBtn = (Button) findViewById( R.id.updateUserPhotoBtn);
         /*final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(ManageUsersActivity.this, android.R.layout.simple_list_item_1, myArrayList);
 
         users = (ListView) findViewById(R.id.ListView_1);
@@ -61,10 +61,10 @@ public class ManageUsersActivity extends AppCompatActivity {
 
 
 
-        uploadUserPhotoBtn.setOnClickListener( new View.OnClickListener() {
+        updateUserPhotoBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent doorControlIntent = new Intent( getApplicationContext(), UploadPhotoActivity.class );
+                Intent doorControlIntent = new Intent( getApplicationContext(), UpdateUserPhotoActivity.class );
                 startActivity( doorControlIntent );
             }
         } );

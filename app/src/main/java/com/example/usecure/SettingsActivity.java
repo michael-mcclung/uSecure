@@ -13,8 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SettingsActivity extends AppCompatActivity {
 
     // variables
-    Button manageBtn, pairDeviceBtn, passKeyBtn;
-    Button notificationsBtn, homeBtn, contactUsBtn;
+    Button manageBtn, passKeyBtn, notificationsBtn, homeBtn, contactUsBtn;
     FirebaseAuth mAuth;
 
     @Override // creates settings page
@@ -25,7 +24,6 @@ public class SettingsActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         manageBtn = (Button) findViewById( R.id.manageBtn );
-        pairDeviceBtn = (Button) findViewById( R.id.pairDeviceBtn );
         passKeyBtn = (Button) findViewById( R.id.passKeyBtn );
         notificationsBtn = (Button) findViewById( R.id.notificationsBtn );
         contactUsBtn = (Button) findViewById( R.id.contactUsBtn );
@@ -36,15 +34,6 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent doorControlIntent = new Intent( getApplicationContext(), ManageUsersActivity.class );
-                startActivity( doorControlIntent );
-            }
-        } );
-
-        // go to pair device page
-        pairDeviceBtn.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent doorControlIntent = new Intent( getApplicationContext(), PairDeviceActivity.class );
                 startActivity( doorControlIntent );
             }
         } );
