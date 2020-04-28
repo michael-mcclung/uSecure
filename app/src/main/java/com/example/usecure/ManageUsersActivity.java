@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,7 +40,8 @@ public class ManageUsersActivity extends AppCompatActivity {
         user = (EditText) findViewById(R.id.deleteUser);
         users = (ListView) findViewById(R.id.ListView_1);
         users.setAdapter(myArrayAdapter);
-        manageUserDatabase = FirebaseDatabase.getInstance().getReference( "Main User" ).child("Sub Users");
+        String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        manageUserDatabase = FirebaseDatabase.getInstance().getReference( "Main User" ).child(userUid).child("Sub Users");
         manageUserDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

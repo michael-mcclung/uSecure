@@ -35,7 +35,8 @@ public class AddUser extends AppCompatActivity {
         password = (EditText) findViewById(R.id.pw1);
         back = (Button) findViewById(R.id.backToSettingsBtn2);
         addusr = (Button) findViewById(R.id.adduser);
-        addUserDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child("Sub Users");
+        String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        addUserDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child(userUid).child("Sub Users");
         NewUser = new SubUser();
 
         // add user information
