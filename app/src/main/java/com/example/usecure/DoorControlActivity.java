@@ -2,6 +2,8 @@
 package com.example.usecure;
 
 /*imports*/
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +13,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
+import java.util.TooManyListenersException;
 
 /*door control activity control code*/
 public class DoorControlActivity extends AppCompatActivity {
@@ -25,11 +32,12 @@ public class DoorControlActivity extends AppCompatActivity {
     // variables
     private ToggleButton doorControlToggle;
     private Button addNewDoorBtn, homeBtn;
-    private Spinner doorSpinner;
-    private EditText nameOfNewDoorText;
+    private EditText nameOfNewDoorText, doorSelect;
     private DatabaseReference doorControlDatabase;
-    private ArrayAdapter spinnerArrayAdapter;
-    private ArrayList<String> doorOptions = new ArrayList<String>();
+    door door;
+    ListView doors;
+    ArrayList<String> myArrayList = new ArrayList<>();
+
 
     @Override // when starting the page do these
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +45,69 @@ public class DoorControlActivity extends AppCompatActivity {
         setContentView( R.layout.activity_door_control );
 
         // initialize all variables into view by ids
-        doorSpinner = (Spinner) findViewById( R.id.doorSpinner );
+        doorSelect = (EditText) findViewById(R.id.selectDoor);
+        doorControlToggle = (ToggleButton) findViewById(R.id.doorControlToggle);
+        doors = (ListView) findViewById(R.id.ListView_door);
+        nameOfNewDoorText = (EditText) findViewById(R.id.nameOfNewDoorText);
         addNewDoorBtn = (Button) findViewById( R.id.addNewDoorBtn );
         nameOfNewDoorText = (EditText) findViewById( R.id.nameOfNewDoorText );
         doorControlToggle = (ToggleButton) findViewById( R.id.doorControlToggle );
         homeBtn = (Button) findViewById( R.id.homeBtn );
-
+        door = new door();
+        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(DoorControlActivity.this, android.R.layout.simple_list_item_1, myArrayList);
+        doors.setAdapter(myArrayAdapter);
         // initialize reference for Firebase database
-        doorControlDatabase = FirebaseDatabase.getInstance().getReference( "Main User");
+        doorControlDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child("Door List");
 
-        // creating the array adapter instance having the list of options
-        spinnerArrayAdapter = new ArrayAdapter( this, android.R.layout.simple_spinner_item, doorOptions );
-        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+        doorControlToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String select = doorSelect.getText().toString().trim();
+                if(doorControlToggle.isChecked()){
+                    doorControlDatabase.child(select).child("status").setValue(1);
+                }else{
+                    doorControlDatabase.child(select).child("status").setValue(0);
+                }
+            }
+        });
 
-        // setting the array adapter data on the Spinner
-        doorSpinner.setAdapter( spinnerArrayAdapter );
+        addNewDoorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                door.setName(nameOfNewDoorText.getText().toString().trim());
+                door.setStatus(0);
+                doorControlDatabase.child(door.getName()).setValue(door);
+            }
+        });
+
+        doorControlDatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String value = String.valueOf(dataSnapshot.child("name").getValue().toString());//getValue(String.class);
+                myArrayList.add(value);
+                myArrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                myArrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         // home button function
         homeBtn.setOnClickListener( new View.OnClickListener() {
@@ -63,70 +119,7 @@ public class DoorControlActivity extends AppCompatActivity {
             }
         } );
         // button to add new door to Firebase database & spinner drop down menu
-        addNewDoorBtn.setOnClickListener( new View.OnClickListener() {
-            @Override // add a new door name and switch state
-            public void onClick(View v) {
 
-                // variables
-                String userID = doorControlDatabase.push().getKey();
-                String getDoorName = nameOfNewDoorText.getText().toString();
-                int switchState = 0;
-                String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                // add door name given by user, update ArrayListOfDoors and firebase database
-                doorOptions.add(getDoorName);
-                ArrayListOfDoors addToList = new ArrayListOfDoors( userID, switchState );
-                doorControlDatabase.child( userUid ).child( "Door Control" ).child( getDoorName ).setValue( addToList );
-
-                // let user know doors were added
-                Toast.makeText( DoorControlActivity.this, "Door Added", Toast.LENGTH_SHORT ).show();
-            }
-        } );
-
-        // spinner / drop down menu for door control
-        doorSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-
-            @Override // show doors availabe and let user know which door is currently selected
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                // showing all doors available and selecting correct door selected by user
-                String spinnerText = parent.getItemAtPosition( position ).toString();
-                Toast.makeText( parent.getContext(), spinnerText, Toast.LENGTH_LONG ).show();
-                String result = (String) parent.getItemAtPosition( position );
-
-                // show user selected door
-                Toast.makeText(getApplicationContext(), "Selected: " + result, Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-;
-            }
-        } );
-
-        /*not done completely *****************/
-        doorControlToggle.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
-
-            // variables to use to get correct item from firebase database
-            int switchStateOn = 1, getSwitchStateOff = 0;
-            String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-            @Override // when toggle is selected either update firebase database to 1 or 0
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                // variables
-                String spinnerSelected = doorSpinner.getSelectedItem().toString();
-
-                if (isChecked)
-                {
-                    // used to turn switch state of doors on
-                    doorControlDatabase.child( userUid ).child( "Door Control" ).child( spinnerSelected ).setValue( "0" );
-                }
-                else
-                {
-                    // used to turn switch state of doors off
-                    doorControlDatabase.child( userUid ).child( "Door Control" ).child( spinnerSelected ).setValue( "1" );
-                }
-            }
-        } );
     }
 }
