@@ -56,8 +56,10 @@ public class DoorControlActivity extends AppCompatActivity {
         door = new door();
         final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(DoorControlActivity.this, android.R.layout.simple_list_item_1, myArrayList);
         doors.setAdapter(myArrayAdapter);
+      
         // initialize reference for Firebase database
-        doorControlDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child("Door List");
+        String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        doorControlDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child(userUid).child("Door List");
 
         doorControlToggle.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,14 +1,23 @@
 package com.example.usecure;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -16,6 +25,7 @@ public class ManageUsersActivity extends AppCompatActivity {
 
 
     Button updateUserPhotoBtn, addUserBtn, backToSettingsBtn, deleteUserBtn;
+    EditText user;
     ListView users;
     DatabaseReference manageUserDatabase;
     ArrayList<String> myArrayList = new ArrayList<>();
@@ -25,15 +35,17 @@ public class ManageUsersActivity extends AppCompatActivity {
         setContentView( R.layout.activity_manage_users );
 
         updateUserPhotoBtn = (Button) findViewById( R.id.updateUserPhotoBtn);
-        /*final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(ManageUsersActivity.this, android.R.layout.simple_list_item_1, myArrayList);
+        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(ManageUsersActivity.this, android.R.layout.simple_list_item_1, myArrayList);
 
+        user = (EditText) findViewById(R.id.deleteUser);
         users = (ListView) findViewById(R.id.ListView_1);
         users.setAdapter(myArrayAdapter);
-        manageUserDatabase = FirebaseDatabase.getInstance().getReference( "Main User" ).child("Sub Users");
+        String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        manageUserDatabase = FirebaseDatabase.getInstance().getReference( "Main User" ).child(userUid).child("Sub Users");
         manageUserDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String value = dataSnapshot.getValue(String.class);
+                String value = String.valueOf(dataSnapshot.child("username").getValue().toString());//getValue(String.class);
                 myArrayList.add(value);
                 myArrayAdapter.notifyDataSetChanged();
             }
@@ -57,8 +69,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
-
+        });
 
 
         updateUserPhotoBtn.setOnClickListener( new View.OnClickListener() {
@@ -82,7 +93,8 @@ public class ManageUsersActivity extends AppCompatActivity {
         deleteUserBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final String usr = user.getText().toString().trim();
+                manageUserDatabase.child(usr).removeValue();
             }
         } );
 
