@@ -109,10 +109,12 @@ public class VoiceCommandActivity extends AppCompatActivity {
                     String text = voiceInText.get( 0 );
                     String id = voiceCommandDatabase.push().getKey();
                     String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    String switchState = "0";
 
                     // create new audio file information / add to firebase realtime database
                     AudioFiles af = new AudioFiles( id, text );
                     voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child("Door Name").setValue( text );
+                    voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child("switchState").setValue(switchState);
 
                     // alert user of completion
                     Toast.makeText( this, "Audio name and audio added", Toast.LENGTH_LONG ).show();

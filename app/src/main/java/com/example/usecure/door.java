@@ -23,4 +23,3 @@ public class door {
     public door(){
 
     }
-}
