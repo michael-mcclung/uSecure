@@ -20,6 +20,7 @@ public class door {
         this.status = status;
     }
 
-    public door(){
+    public door() {
 
     }
+}
