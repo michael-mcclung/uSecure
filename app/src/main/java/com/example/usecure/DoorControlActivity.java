@@ -25,69 +25,58 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.TooManyListenersException;
+import java.util.ArrayList;
 
 /*door control activity control code*/
 public class DoorControlActivity extends AppCompatActivity {
 
     // variables
     private ToggleButton doorControlToggle;
-    private Button addNewDoorBtn, homeBtn;
-    private EditText nameOfNewDoorText, doorSelect;
+    private Button homeBtn;
+    private EditText doorSelect;
     private DatabaseReference doorControlDatabase;
-    door door;
-    ListView doors;
-    ArrayList<String> myArrayList = new ArrayList<>();
-
 
     @Override // when starting the page do these
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_door_control );
+        super.onCreate( savedInstanceState);
+        setContentView(R.layout.activity_door_control);
 
         // initialize all variables into view by ids
         doorSelect = (EditText) findViewById(R.id.selectDoor);
         doorControlToggle = (ToggleButton) findViewById(R.id.doorControlToggle);
-        doors = (ListView) findViewById(R.id.ListView_door);
-        nameOfNewDoorText = (EditText) findViewById(R.id.nameOfNewDoorText);
-        addNewDoorBtn = (Button) findViewById( R.id.addNewDoorBtn );
-        nameOfNewDoorText = (EditText) findViewById( R.id.nameOfNewDoorText );
-        doorControlToggle = (ToggleButton) findViewById( R.id.doorControlToggle );
-        homeBtn = (Button) findViewById( R.id.homeBtn );
-        door = new door();
+        homeBtn = (Button) findViewById(R.id.homeBtn);
+        ListView doors = (ListView) findViewById(R.id.ListView_door);
+
+        // arrays and class refernces
+        final ArrayList<String> myArrayList = new ArrayList<>();
         final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(DoorControlActivity.this, android.R.layout.simple_list_item_1, myArrayList);
         doors.setAdapter(myArrayAdapter);
-      
-        // initialize reference for Firebase database
-        String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        doorControlDatabase = FirebaseDatabase.getInstance().getReference( "Main User").child(userUid).child("Door List");
 
+        // initialize reference for Firebase database
+        doorControlDatabase = FirebaseDatabase.getInstance().getReference("Main User");
+
+        // door control toggle
         doorControlToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String select = doorSelect.getText().toString().trim();
-                if(doorControlToggle.isChecked()){
-                    doorControlDatabase.child(select).child("status").setValue(1);
-                }else{
-                    doorControlDatabase.child(select).child("status").setValue(0);
-                }
-            }
-        });
+                String select = doorSelect.getText().toString();
+                String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        addNewDoorBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                door.setName(nameOfNewDoorText.getText().toString().trim());
-                door.setStatus(0);
-                doorControlDatabase.child(door.getName()).setValue(door);
-            }
+                if(doorControlToggle.isChecked()){
+                    doorControlDatabase.child(Uid).child("Door List").child(select).child("Door State").child("switchState").setValue(1);
+                }else{
+                    doorControlDatabase.child(Uid).child("Door List").child(select).child("Door State").child("switchState").setValue(0);
+                }            }
         });
 
         doorControlDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String value = String.valueOf(dataSnapshot.child("name").getValue().toString());//getValue(String.class);
-                myArrayList.add(value);
-                myArrayAdapter.notifyDataSetChanged();
+                String select = doorSelect.getText().toString();
+                String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//                String value = dataSnapshot.child(Uid).child("Door List").child(select).child("Door State").getValue().toString();
+//                myArrayList.add(value);
+//                myArrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -112,16 +101,13 @@ public class DoorControlActivity extends AppCompatActivity {
         });
 
         // home button function
-        homeBtn.setOnClickListener( new View.OnClickListener() {
+        homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override // go to home page once button is pressed
             public void onClick(View v) {
                 // creat intent to go to home page and then initiate it
-                Intent homeIntent = new Intent( getApplicationContext(), Home.class );
-                startActivity( homeIntent );
+                Intent homeIntent = new Intent(getApplicationContext(), Home.class);
+                startActivity(homeIntent);
             }
-        } );
-        // button to add new door to Firebase database & spinner drop down menu
-
-
+        });
     }
 }

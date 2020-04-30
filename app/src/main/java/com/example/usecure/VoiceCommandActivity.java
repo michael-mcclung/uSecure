@@ -5,23 +5,16 @@ package com.example.usecure;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -64,7 +57,8 @@ public class VoiceCommandActivity extends AppCompatActivity {
                 
                 // remove value form firebase databse and let user know audio deleted
                 DatabaseReference deleteVoiceRef = FirebaseDatabase.getInstance().getReference().child("Main User").child( userUid ).child( "Voice Recognition" );
-                deleteVoiceRef.child("Door Name").getRef().removeValue();
+                deleteVoiceRef.child("Speech-to-text").getRef().removeValue();
+                deleteVoiceRef.child("switchState").getRef().removeValue();
                 Toast.makeText( VoiceCommandActivity.this, "Audio deleted", Toast.LENGTH_LONG ).show();
 
             }
@@ -113,7 +107,7 @@ public class VoiceCommandActivity extends AppCompatActivity {
 
                     // create new audio file information / add to firebase realtime database
                     AudioFiles af = new AudioFiles( id, text );
-                    voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child("Door Name").setValue( text );
+                    voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child("Speech-to-text").setValue( text );
                     voiceCommandDatabase.child( userUid ).child( "Voice Recognition" ).child("switchState").setValue(switchState);
 
                     // alert user of completion
