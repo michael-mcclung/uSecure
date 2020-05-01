@@ -75,7 +75,7 @@ public class Home extends AppCompatActivity {
         securityCamFeedBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cameraFeedIntent = new Intent( getApplicationContext(), SecurityCameraFeedActivity.class );
+                Intent cameraFeedIntent = new Intent( getApplicationContext(), uploadPhoto_toPi.class );
                 startActivity( cameraFeedIntent );
             }
         } );
