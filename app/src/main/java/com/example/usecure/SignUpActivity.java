@@ -25,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     // variables
     private FirebaseAuth mAuth;
     EditText newEmailText, newPasswordText, fname, lname, address, phoneNum;
-    Button goBackLogInBtn, registerBtn, uploadPhotoBtn;
+    Button goBackLogInBtn, registerBtn, uploadPhotoBtn, photoTest;
 
     // firebase database reference
     DatabaseReference signUpDatabase = FirebaseDatabase.getInstance().getReference( "Main User");
