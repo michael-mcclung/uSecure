@@ -3,13 +3,16 @@ package com.example.usecure;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -33,23 +36,27 @@ import com.google.firebase.iid.InstanceIdResult;
 
 public class NotificationsActivity extends AppCompatActivity {
 
+    // variables
     private Button settingsBtn2;
-    private Switch doorOpenSwitch;
+    private Switch doorOpenSwitch, newUserSwitchBtn, intruderSwitchBtn;
     private DatabaseReference notificationRef;
     private static final String TAG = "NotificationsActivity";
 
-    @Override
+    @Override // create notifications page
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_notifications );
 
+        // initialize variables
         settingsBtn2 = (Button) findViewById( R.id.settingsBtn2 );
         doorOpenSwitch = (Switch) findViewById( R.id.doorOpenSwitch );
+        newUserSwitchBtn = (Switch) findViewById( R.id.newUserSwitchBtn );
+        intruderSwitchBtn = (Switch) findViewById( R.id.intruderSwitchBtn );
+
+        // initialize firebase database main reference
         notificationRef = FirebaseDatabase.getInstance().getReference( "Main User" );
 
-        String ref = notificationRef.getDatabase().getReference().toString();
-        System.out.println( ref );
-
+        // settings button button
         settingsBtn2.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,20 +65,76 @@ public class NotificationsActivity extends AppCompatActivity {
             }
         } );
 
+        // uid of current user and different database reference paths for different notifications
         String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference switchRefernece = notificationRef.child( Uid ).child( "LED" ).child( "LED State" ).child( "switchState" );
+        DatabaseReference ledSwitchRef = notificationRef.child( Uid ).child( "LED" ).child( "LED State" ).child( "switchState" );
+        DatabaseReference intruderRef = notificationRef.child( Uid ).child( "Notifications" ).child( "Unrecognized" );
+        DatabaseReference newUserRef = notificationRef.child( Uid ).child( "Sub Users" );
 
-        switchRefernece.addValueEventListener( new ValueEventListener() {
+        // make a pop-up in app to user of their door being opened
+        ledSwitchRef.addValueEventListener( new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot ledDataSnapshot) {
+
+                // variables
+                String ledValue = ledDataSnapshot.getValue().toString();
+                String ledCompare = "1";
+
+                /* if door switch is activated and value / compare are same then make a pop up notification
+                   to user and send a notification to their phone that the door has been opened */
+                if (doorOpenSwitch.isChecked() && ledValue.equals( ledCompare )) {
+                        Toast.makeText( getApplicationContext(), "DOOR OPENED", Toast.LENGTH_LONG ).show();
+                        notifyOpenDoor();
+                    }
+                }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        } );
+
+        // make a pop-up in app to user of an intruder trying to get in
+        intruderRef.addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                // variables
                 String value = dataSnapshot.getValue().toString();
                 String compare = "1";
-                if (value.equals( compare )){
-                    addNotification();
+
+                /* if door switch is activated and value / compare are same then make a pop up notification
+                   to user and send a notification to their phone that an intruder tried to get into their home */
+                if (newUserSwitchBtn.isChecked() && value.equals( compare )) {
+                        Toast.makeText( getApplicationContext(), "INTRUDER", Toast.LENGTH_LONG ).show();
+                        notifyOfIntruder();
+                    }
+                }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        } );
+
+        // make a pop-up in app to user of a new sub user being added
+        newUserRef.addValueEventListener( new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // variables
+                String value = dataSnapshot.getValue().toString();
+                String compare = "1";
+
+                /* if door switch is activated and value / compare are same then make a pop up notification
+                   to user and send a notification to their phone that a new user was added*/
+                if (newUserSwitchBtn.isChecked() && value.equals( compare )) {
+                    Toast.makeText( getApplicationContext(), "NEW USER ADDED", Toast.LENGTH_LONG ).show();
+                    notifyOfNewUser();
                 }
             }
 
+            // error to read value from database
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
@@ -79,24 +142,86 @@ public class NotificationsActivity extends AppCompatActivity {
         } );
     }
 
-    private void addNotification() {
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
-                            return;
-                        }
+    // notification of open door function
+    private void notifyOpenDoor(){
 
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
+        // variables
+        String name = "uSecure";
+        String messege = "Someone has entered your house!";
 
-                        // Log and toast
-                        @SuppressLint({"StringFormatInvalid", "LocalSuppress"}) String msg = getString(R.string.msg_token_fmt, token);
-                        Log.d(TAG, msg);
-                        Toast.makeText(NotificationsActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
+        // creating an id and name to get the correct channel to sen the notification
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel( "door", "door", NotificationManager.IMPORTANCE_DEFAULT );
+
+            NotificationManager manager = getSystemService( NotificationManager.class );
+            manager.createNotificationChannel( channel );
+        }
+
+        // setting specific characteristics about the look of the notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder( this, "door" )
+                .setContentText( messege )
+                .setSmallIcon( R.drawable.ic_launcher_recognized_foreground )
+                .setAutoCancel( true )
+                .setContentTitle( name );
+
+        // getting notification from this page and building the final id / notification
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from( this );
+        managerCompat.notify( 999, builder.build() );
+    }
+
+    // notification of an intruder trying to get into home
+    private void notifyOfIntruder(){
+
+        // variables
+        String name = "uSecure";
+        String messege = "INTRUDER! Someone tried to enter your home";
+
+        // creating an id and name to get the correct channel to sen the notification
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel( "intruder", "intruder", NotificationManager.IMPORTANCE_DEFAULT );
+
+            NotificationManager manager = getSystemService( NotificationManager.class );
+            manager.createNotificationChannel( channel );
+        }
+
+        // setting specific characteristics about the look of the notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder( this, "intruder" )
+                .setContentText( messege )
+                .setSmallIcon( R.drawable.ic_launcher_unrecognized_foreground )
+                .setAutoCancel( true )
+                .setContentTitle( name );
+
+        // getting notification from this page and building the final id / notification
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from( this );
+        managerCompat.notify( 999, builder.build() );
+
+    }
+
+    // notification of a new user added
+    private void notifyOfNewUser(){
+
+        // variables
+        String name = "uSecure";
+        String messege = "New user was created!";
+
+        // creating an id and name to get the correct channel to sen the notification
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel( "NewUser", "NewUser", NotificationManager.IMPORTANCE_DEFAULT );
+
+            NotificationManager manager = getSystemService( NotificationManager.class );
+            manager.createNotificationChannel( channel );
+        }
+
+        // setting specific characteristics about the look of the notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder( this, "NewUser" )
+                .setContentText( messege )
+                .setSmallIcon( R.drawable.new_user_front )
+                .setAutoCancel( true )
+                .setContentTitle( name );
+
+        // getting notification from this page and building the final id / notification
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from( this );
+        managerCompat.notify( 999, builder.build() );
+
     }
 }

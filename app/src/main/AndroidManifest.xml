@@ -17,10 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <service
-            android:name=".FirebaseMessagingService"
-            android:enabled="true"
-            android:exported="true"></service>
 
         <activity android:name=".UpdateUserPhotoActivity" />
         <activity android:name=".AddUser" />
@@ -28,11 +24,6 @@
         <activity android:name=".ContactUsActivity" />
         <activity android:name=".NotificationsActivity" />
 
-        <service android:name=".MyFirebaseInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
         <service android:name=".NotificationsActivity">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
