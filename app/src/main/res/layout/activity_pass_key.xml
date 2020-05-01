@@ -8,16 +8,16 @@
     tools:context=".PassKeyActivity">
 
     <Button
-        android:id="@+id/settingsBtn3"
+        android:id="@+id/savePassCodeBtn"
         android:layout_width="135dp"
         android:layout_height="45dp"
         android:background="#87cefa"
-        android:text="SETTINGS"
+        android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.836" />
+        app:layout_constraintVertical_bias="0.59" />
 
     <TextView
         android:id="@+id/textView9"
@@ -60,7 +60,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/updatedCodeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -69,10 +69,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.708" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/userPassCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -85,7 +86,7 @@
         app:layout_constraintVertical_bias="0.389" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/reEnterCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -93,22 +94,32 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.596" />
+        app:layout_constraintVertical_bias="0.482" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/updateBtn"
         android:layout_width="135dp"
         android:layout_height="45dp"
         android:background="#87cefa"
-        android:text="Submit"
+        android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.715" />
+        app:layout_constraintVertical_bias="0.827" />
+
+    <Button
+        android:id="@+id/settingsBtn3"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
+        android:background="#87cefa"
+        android:text="SETTINGS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.931" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
