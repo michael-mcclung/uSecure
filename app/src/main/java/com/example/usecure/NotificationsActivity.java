@@ -38,7 +38,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
     // variables
     private Button settingsBtn2;
-    private Switch doorOpenSwitch, newUserSwitchBtn, intruderSwitchBtn;
+    private Switch doorOpenSwitch, intruderSwitchBtn;
     private DatabaseReference notificationRef;
     private static final String TAG = "NotificationsActivity";
 
@@ -50,7 +50,6 @@ public class NotificationsActivity extends AppCompatActivity {
         // initialize variables
         settingsBtn2 = (Button) findViewById( R.id.settingsBtn2 );
         doorOpenSwitch = (Switch) findViewById( R.id.doorOpenSwitch );
-        newUserSwitchBtn = (Switch) findViewById( R.id.newUserSwitchBtn );
         intruderSwitchBtn = (Switch) findViewById( R.id.intruderSwitchBtn );
 
         // initialize firebase database main reference
@@ -69,7 +68,6 @@ public class NotificationsActivity extends AppCompatActivity {
         String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ledSwitchRef = notificationRef.child( Uid ).child( "LED" ).child( "LED State" ).child( "switchState" );
         DatabaseReference intruderRef = notificationRef.child( Uid ).child( "Notifications" ).child( "Unrecognized" );
-        DatabaseReference newUserRef = notificationRef.child( Uid ).child( "Sub Users" );
 
         // make a pop-up in app to user of their door being opened
         ledSwitchRef.addValueEventListener( new ValueEventListener() {
@@ -105,36 +103,12 @@ public class NotificationsActivity extends AppCompatActivity {
 
                 /* if door switch is activated and value / compare are same then make a pop up notification
                    to user and send a notification to their phone that an intruder tried to get into their home */
-                if (newUserSwitchBtn.isChecked() && value.equals( compare )) {
+                if (intruderSwitchBtn.isChecked() && value.equals( compare )) {
                         Toast.makeText( getApplicationContext(), "INTRUDER", Toast.LENGTH_LONG ).show();
                         notifyOfIntruder();
                     }
                 }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        } );
-
-        // make a pop-up in app to user of a new sub user being added
-        newUserRef.addValueEventListener( new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                // variables
-                String value = dataSnapshot.getValue().toString();
-                String compare = "1";
-
-                /* if door switch is activated and value / compare are same then make a pop up notification
-                   to user and send a notification to their phone that a new user was added*/
-                if (newUserSwitchBtn.isChecked() && value.equals( compare )) {
-                    Toast.makeText( getApplicationContext(), "NEW USER ADDED", Toast.LENGTH_LONG ).show();
-                    notifyOfNewUser();
-                }
-            }
-
-            // error to read value from database
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
