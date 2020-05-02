@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,18 +45,12 @@ public class PassKeyActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // variables
-                //String passCodeUiD = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                String reEnter = reEnterCode.getText().toString();
+                String passCodeUiD = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 String code = userPassCode.getText().toString();
 
-                if (code == reEnter) {
-                    // save pass code and update firebase
-                    passCodeRef.child( "Enter Passcode" ).child( "Passcode" ).setValue( code );
-                    Toast.makeText( PassKeyActivity.this, "Pass code added!", Toast.LENGTH_SHORT ).show();
-                } else {
-                    Toast.makeText( PassKeyActivity.this, "Pass codes do not match," +
-                            " Please re-enter", Toast.LENGTH_SHORT ).show();
-                }
+                // add passcode to firebase database and let user know passcode was added
+                passCodeRef.child( passCodeUiD ).child( "Enter Passcode" ).child( "Passcode" ).setValue( code );
+                Toast.makeText( PassKeyActivity.this, "Pass code added!", Toast.LENGTH_LONG ).show();
             }
         } );
 
@@ -64,12 +59,12 @@ public class PassKeyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // get information
+                // variables
                 String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 String updatedCodeTxt = updatedCodeText.getText().toString();
 
                 // remove value form firebase databse and let user know audio deleted
-                passCodeRef.child( "Enter Passcode" ).child( "Passcode" ).setValue( updatedCodeTxt );
+                passCodeRef.child( userUid ).child( "Enter Passcode" ).child( "Passcode" ).setValue( updatedCodeTxt );
                 Toast.makeText( PassKeyActivity.this, "Passcode updated", Toast.LENGTH_LONG ).show();
 
             }
