@@ -16,19 +16,22 @@ import com.google.firebase.database.FirebaseDatabase;
 public class PassKeyActivity extends AppCompatActivity {
 
     // variables
-    private Button updateBtn, homeBtn, savePassCodeBtn, reEnterCode;
-    private EditText userPassCode, updatedCodeText;
-    private DatabaseReference passCodeRef;
+    EditText userPassCode, updatedCodeText;
+    DatabaseReference passCodeRef;
+    Button updateBtn, reEnterCode, savePassCodeBtn, homeBtn, settingsBackBtn;
 
     @Override // create voice command page
     protected void onCreate(Bundle savedInstanceStatus) {
         super.onCreate( savedInstanceStatus );
-        setContentView( R.layout.activity_voice_command );
+        setContentView( R.layout.activity_pass_key );
 
         // initiate variables
         passCodeRef = FirebaseDatabase.getInstance().getReference( "Main User" );
+
+        // variables
+        settingsBackBtn = (Button) findViewById( R.id.settingsBackBtn );
         updateBtn = (Button) findViewById( R.id.updateBtn );
-        reEnterCode = (Button) findViewById(R.id.registerBtn);
+        reEnterCode = (Button) findViewById( R.id.registerBtn );
         savePassCodeBtn = (Button) findViewById( R.id.savePassCodeBtn );
         homeBtn = (Button) findViewById( R.id.settingsBtn2 );
         userPassCode = (EditText) findViewById(R.id.userPassCode);
@@ -41,13 +44,18 @@ public class PassKeyActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // variables
+                //String passCodeUiD = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String reEnter = reEnterCode.getText().toString();
                 String code = userPassCode.getText().toString();
-                String passCodeUiD = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                // save pass code and update firebase
-                passCodeRef.child(passCodeUiD).child("Enter Passcode").child("Passcode").setValue(code);
-                Toast.makeText(PassKeyActivity.this, "Pass code added!", Toast.LENGTH_SHORT).show();
-
+                if (code == reEnter) {
+                    // save pass code and update firebase
+                    passCodeRef.child( "Enter Passcode" ).child( "Passcode" ).setValue( code );
+                    Toast.makeText( PassKeyActivity.this, "Pass code added!", Toast.LENGTH_SHORT ).show();
+                } else {
+                    Toast.makeText( PassKeyActivity.this, "Pass codes do not match," +
+                            " Please re-enter", Toast.LENGTH_SHORT ).show();
+                }
             }
         } );
 
@@ -58,22 +66,21 @@ public class PassKeyActivity extends AppCompatActivity {
 
                 // get information
                 String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                String updatedCode = updatedCodeText.getText().toString();
+                String updatedCodeTxt = updatedCodeText.getText().toString();
 
                 // remove value form firebase databse and let user know audio deleted
-                DatabaseReference updatePassRef = FirebaseDatabase.getInstance().getReference().child("Main User").child( userUid ).child( "Enter Passcode" );
-                updatePassRef.child("Passcode").setValue(updatedCodeText);
+                passCodeRef.child( "Enter Passcode" ).child( "Passcode" ).setValue( updatedCodeTxt );
                 Toast.makeText( PassKeyActivity.this, "Passcode updated", Toast.LENGTH_LONG ).show();
 
             }
         } );
 
         // go to home page
-        homeBtn.setOnClickListener( new View.OnClickListener() {
+        settingsBackBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent homeIntent = new Intent( getApplicationContext(), Home.class );
-                startActivity( homeIntent );
+                Intent settingsIntent = new Intent( getApplicationContext(), SettingsActivity.class );
+                startActivity( settingsIntent );
             }
         } );
     }

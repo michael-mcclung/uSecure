@@ -75,7 +75,7 @@ public class ManageUsersActivity extends AppCompatActivity {
         updateUserPhotoBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent doorControlIntent = new Intent( getApplicationContext(), UpdateUserPhotoActivity.class );
+                Intent doorControlIntent = new Intent( getApplicationContext(), uploadPhoto_toPi.class );
                 startActivity( doorControlIntent );
             }
         } );

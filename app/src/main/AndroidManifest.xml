@@ -18,9 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".uploadPhoto_toPi"></activity>
-        <activity android:name=".UpdateUserPhotoActivity" />
         <activity android:name=".AddUser" />
-        <activity android:name=".UploadPhotoActivity" />
         <activity android:name=".ContactUsActivity" />
         <activity android:name=".NotificationsActivity" />
 

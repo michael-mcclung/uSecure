@@ -13,7 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class uploadPhoto_toPi extends AppCompatActivity {
-    private Button Signup, upload;
+    private Button backToHomeBtn, upload;
     private DatabaseReference photoDatabase;
 
     @Override
@@ -21,14 +21,14 @@ public class uploadPhoto_toPi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_photo_to_pi);
         photoDatabase = FirebaseDatabase.getInstance().getReference("Main User");
-        Signup = (Button) findViewById(R.id.backToSign);
+        backToHomeBtn = (Button) findViewById(R.id.backToHomeBtn);
         upload = (Button) findViewById(R.id.uploadPhotoBtn3);
 
-        Signup.setOnClickListener(new View.OnClickListener() {
+        backToHomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent back = new Intent(getApplicationContext(), SignUpActivity.class);
-                startActivity(back);
+                Intent backToHome = new Intent(getApplicationContext(), Home.class);
+                startActivity(backToHome);
             }
         });
 

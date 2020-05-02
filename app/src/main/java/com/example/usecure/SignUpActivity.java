@@ -25,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     // variables
     private FirebaseAuth mAuth;
     EditText newEmailText, newPasswordText, fname, lname, address, phoneNum;
-    Button goBackLogInBtn, registerBtn, uploadPhotoBtn, photoTest;
+    Button goBackLogInBtn, registerBtn;
 
     // firebase database reference
     DatabaseReference signUpDatabase = FirebaseDatabase.getInstance().getReference( "Main User");
@@ -39,7 +39,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Initialize variables
         mAuth = FirebaseAuth.getInstance();
-        uploadPhotoBtn = (Button) findViewById( R.id.uploadPhotoBtn );
         goBackLogInBtn = (Button) findViewById( R.id.goBackLogInBtn );
         registerBtn = (Button) findViewById( R.id.registerBtn );
         fname = (EditText) findViewById(R.id.firstNameEditText);
@@ -48,15 +47,6 @@ public class SignUpActivity extends AppCompatActivity {
         newPasswordText = (EditText) findViewById(R.id.newPasswordText);
         address = (EditText) findViewById(R.id.addressEditText);
         phoneNum = (EditText) findViewById(R.id.phoneEditText);
-
-        // go to upload photo page
-        uploadPhotoBtn.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goBackIntent = new Intent( getApplicationContext(), UploadPhotoActivity.class );
-                startActivity( goBackIntent );
-            }
-        } );
 
         // go back to login page
         goBackLogInBtn.setOnClickListener( new View.OnClickListener() {
